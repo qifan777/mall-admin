@@ -6,13 +6,19 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    vue(),
-    vueJsx(),
-  ],
+  plugins: [vue(), vueJsx()],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  },
+  server: {
+    proxy: {
+      '/mall-api': {
+        target: 'http://localhost:8890',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/mall-api/, '')
+      }
     }
   }
 })

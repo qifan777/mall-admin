@@ -14,10 +14,13 @@ const { query } = toRefs(queryData.value)
       <el-form-item label="手机号">
         <el-input v-model="query.phone"></el-input>
       </el-form-item>
+      <el-form-item label="密码">
+        <el-input v-model="query.password"></el-input>
+      </el-form-item>
       <el-form-item label="昵称">
         <el-input v-model="query.nickname"></el-input>
       </el-form-item>
-      <el-form-item label="性别">
+      <el-form-item label="性比">
         <el-input v-model="query.gender"></el-input>
       </el-form-item>
       <el-form-item label=" ">

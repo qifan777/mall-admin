@@ -1,2 +1,2 @@
-export type AllErrors = {};
-export type ApiErrors = {};
+export type AllErrors = {}
+export type ApiErrors = {}

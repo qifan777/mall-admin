@@ -84,6 +84,11 @@ const handleDelete = (ids: string[]) => {
           {{ row.phone }}
         </template>
       </el-table-column>
+      <el-table-column label="密码" prop="password" sortable="custom">
+        <template v-slot:default="{ row }: UserScope">
+          {{ row.password }}
+        </template>
+      </el-table-column>
       <el-table-column label="昵称" prop="nickname" sortable="custom">
         <template v-slot:default="{ row }: UserScope">
           {{ row.nickname }}
@@ -94,7 +99,7 @@ const handleDelete = (ids: string[]) => {
           <el-avatar :src="row.avatar" alt=""></el-avatar>
         </template>
       </el-table-column>
-      <el-table-column label="性别" prop="gender" sortable="custom">
+      <el-table-column label="性比" prop="gender" sortable="custom">
         <template v-slot:default="{ row }: UserScope">
           {{ row.gender }}
         </template>
@@ -107,16 +112,6 @@ const handleDelete = (ids: string[]) => {
       <el-table-column label="更新时间" prop="editedTime" sortable="custom">
         <template v-slot:default="{ row }: UserScope">
           {{ row.editedTime }}
-        </template>
-      </el-table-column>
-      <el-table-column label="创建人" prop="creator.phone" sortable="custom" show-overflow-tooltip>
-        <template v-slot:default="{ row }: UserScope">
-          {{ row.creator.nickname }}({{ row.creator.phone }})
-        </template>
-      </el-table-column>
-      <el-table-column label="更新人" prop="editor.phone" sortable="custom" show-overflow-tooltip>
-        <template v-slot:default="{ row }: UserScope">
-          {{ row.editor.nickname }}({{ row.editor.phone }})
         </template>
       </el-table-column>
       <el-table-column label="操作" fixed="right" width="{280}">

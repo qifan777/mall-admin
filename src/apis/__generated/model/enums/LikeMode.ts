@@ -1,7 +1,2 @@
-export const LikeMode_CONSTANTS = [
-    'EXACT', 
-    'START', 
-    'END', 
-    'ANYWHERE'
-] as const;
-export type LikeMode = typeof LikeMode_CONSTANTS[number];
+export const LikeMode_CONSTANTS = ['EXACT', 'START', 'END', 'ANYWHERE'] as const
+export type LikeMode = (typeof LikeMode_CONSTANTS)[number]

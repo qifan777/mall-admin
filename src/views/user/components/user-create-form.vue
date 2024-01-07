@@ -13,7 +13,8 @@ const { closeDialog, reloadTableData } = userStore
 const { createForm, dialogData } = storeToRefs(userStore)
 const createFormRef = ref<FormInstance>()
 const rules = reactive<FormRules<typeof createForm>>({
-  phone: [{ required: true, message: '请输入手机号', trigger: 'blur' }]
+  phone: [{ required: true, message: '请输入手机号', trigger: 'blur' }],
+  password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
 })
 const init = async () => {
   dialogData.value.title = '创建'
@@ -47,13 +48,16 @@ const handleConfirm = () => {
       <el-form-item label="手机号" prop="phone">
         <el-input v-model="createForm.phone"></el-input>
       </el-form-item>
+      <el-form-item label="密码" prop="password">
+        <el-input v-model="createForm.password"></el-input>
+      </el-form-item>
       <el-form-item label="昵称" prop="nickname">
         <el-input v-model="createForm.nickname"></el-input>
       </el-form-item>
       <el-form-item label="头像" prop="avatar">
         <image-upload v-model="createForm.avatar"></image-upload>
       </el-form-item>
-      <el-form-item label="性别" prop="gender">
+      <el-form-item label="性比" prop="gender">
         <el-input v-model="createForm.gender"></el-input>
       </el-form-item>
     </el-form>

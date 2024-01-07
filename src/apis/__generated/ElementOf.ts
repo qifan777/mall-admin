@@ -1,3 +1,1 @@
-export type ElementOf<T> = 
-    T extends ReadonlyArray<infer TElement> ? TElement : never
-;
+export type ElementOf<T> = T extends ReadonlyArray<infer TElement> ? TElement : never

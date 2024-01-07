@@ -1,6 +1,6 @@
-import type {Direction} from '../enums/';
+import type { Direction } from '../enums/'
 
 export interface QueryRequest_QuerySort {
-    property: string;
-    direction: Direction;
+  property: string
+  direction: Direction
 }

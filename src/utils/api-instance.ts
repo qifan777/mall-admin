@@ -3,7 +3,7 @@ import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import router from '@/router'
 
-const BASE_URL = '/mall-apis'
+const BASE_URL = '/mall-api'
 export const http = axios.create({
   baseURL: BASE_URL,
   timeout: 10000

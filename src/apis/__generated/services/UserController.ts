@@ -1,6 +1,13 @@
 import type { Executor } from '../'
 import type { UserDto } from '../model/dto/'
-import type { Page, QueryRequest, UserInput, UserSpec } from '../model/static/'
+import type {
+  Page,
+  QueryRequest,
+  SaTokenInfo,
+  UserInput,
+  UserRegisterInput,
+  UserSpec
+} from '../model/static/'
 
 export class UserController {
   constructor(private executor: Executor) {}
@@ -22,6 +29,13 @@ export class UserController {
     >
   }
 
+  async getUserInfo(): Promise<UserDto['UserRepository/COMPLEX_FETCHER']> {
+    const _uri = '/user/user-info'
+    return (await this.executor({ uri: _uri, method: 'GET' })) as Promise<
+      UserDto['UserRepository/COMPLEX_FETCHER']
+    >
+  }
+
   async query(
     options: UserControllerOptions['query']
   ): Promise<Page<UserDto['UserRepository/COMPLEX_FETCHER']>> {
@@ -29,6 +43,15 @@ export class UserController {
     return (await this.executor({ uri: _uri, method: 'POST', body: options.body })) as Promise<
       Page<UserDto['UserRepository/COMPLEX_FETCHER']>
     >
+  }
+
+  async register(options: UserControllerOptions['register']): Promise<SaTokenInfo> {
+    const _uri = '/user/register'
+    return (await this.executor({
+      uri: _uri,
+      method: 'POST',
+      body: options.body
+    })) as Promise<SaTokenInfo>
   }
 
   async save(options: UserControllerOptions['save']): Promise<string> {
@@ -52,5 +75,9 @@ export type UserControllerOptions = {
   }
   delete: {
     body: Array<string>
+  }
+  getUserInfo: {}
+  register: {
+    body: UserRegisterInput
   }
 }

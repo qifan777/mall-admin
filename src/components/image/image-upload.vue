@@ -29,7 +29,7 @@ export default defineComponent({
       <ElUpload
         beforeUpload={beforeImageUpload}
         onSuccess={handleImageSuccess}
-        action={'/mall-apis/oss/upload'}
+        action={'/mall-api/oss/upload'}
         showFileList={false}
         class="image-uploader"
       >

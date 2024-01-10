@@ -2,7 +2,8 @@
 import { toRefs } from 'vue'
 import { useUserStore } from '../store/user-store'
 import { storeToRefs } from 'pinia'
-import DatetimePicker from '@/components/datetime/datetime-picker.vue'
+import DictSelect from '@/components/dict/dict-select.vue'
+import { DictConstants } from '@/apis/__generated/model/enums/DictConstants'
 
 const userStore = useUserStore()
 const { queryData } = storeToRefs(userStore)
@@ -20,8 +21,8 @@ const { query } = toRefs(queryData.value)
       <el-form-item label="昵称">
         <el-input v-model="query.nickname"></el-input>
       </el-form-item>
-      <el-form-item label="性比">
-        <el-input v-model="query.gender"></el-input>
+      <el-form-item label="性别">
+        <dict-select :dict-id="DictConstants.GENDER" v-model="query.gender"></dict-select>
       </el-form-item>
       <el-form-item label=" ">
         <div class="btn-wrapper">

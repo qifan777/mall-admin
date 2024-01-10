@@ -5,14 +5,12 @@ import { assertSuccess } from '@/utils/common'
 import { api } from '@/utils/api-instance'
 import { ElMessageBox } from 'element-plus'
 import type { Scope } from '@/typings'
-import { useUserStore } from '../store/user-store'
-import type { UserDto } from '@/apis/__generated/model/dto'
+import { useDictStore } from '../store/dict-store'
+import type { DictDto } from '@/apis/__generated/model/dto'
 import { Delete, Edit, Plus } from '@element-plus/icons-vue'
-import DictColumn from '@/components/dict/dict-column.vue'
-import { DictConstants } from '@/apis/__generated/model/enums/DictConstants'
 
-type UserScope = Scope<UserDto['UserRepository/COMPLEX_FETCHER']>
-const userStore = useUserStore()
+type DictScope = Scope<DictDto['DictRepository/COMPLEX_FETCHER']>
+const dictStore = useDictStore()
 const {
   loadTableData,
   reloadTableData,
@@ -20,8 +18,8 @@ const {
   handleSortChange,
   handleSelectChange,
   getTableSelectedRows
-} = userStore
-const { pageData, loading, queryRequest, table, updateForm, createForm } = storeToRefs(userStore)
+} = dictStore
+const { pageData, loading, queryRequest, table, updateForm, createForm } = storeToRefs(dictStore)
 onMounted(() => {
   reloadTableData()
 })
@@ -31,7 +29,7 @@ const handleEdit = (row: { id: string }) => {
 }
 const handleCreate = () => {
   openDialog('CREATE')
-  createForm.value = { ...userStore.initForm }
+  createForm.value = { ...dictStore.initForm }
 }
 const handleSingleDelete = (row: { id: string }) => {
   handleDelete([row.id])
@@ -49,7 +47,7 @@ const handleDelete = (ids: string[]) => {
     cancelButtonText: '取消',
     type: 'warning'
   }).then(() => {
-    api.userController.delete({ body: ids }).then((res) => {
+    api.dictController.delete({ body: ids }).then((res) => {
       assertSuccess(res).then(() => reloadTableData())
     })
   })
@@ -80,39 +78,59 @@ const handleDelete = (ids: string[]) => {
       v-loading="loading"
     >
       <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column label="手机号" prop="phone" sortable="custom">
-        <template v-slot:default="{ row }: UserScope">
-          {{ row.phone }}
+      <el-table-column label="值编号" prop="keyId" sortable="custom">
+        <template v-slot:default="{ row }: DictScope">
+          {{ row.keyId }}
         </template>
       </el-table-column>
-      <el-table-column label="密码" prop="password" sortable="custom">
-        <template v-slot:default="{ row }: UserScope">
-          {{ row.password }}
+      <el-table-column label="值名称" prop="keyName" sortable="custom">
+        <template v-slot:default="{ row }: DictScope">
+          {{ row.keyName }}
         </template>
       </el-table-column>
-      <el-table-column label="昵称" prop="nickname" sortable="custom">
-        <template v-slot:default="{ row }: UserScope">
-          {{ row.nickname }}
+      <el-table-column label="值英文名称" prop="keyEnName" sortable="custom">
+        <template v-slot:default="{ row }: DictScope">
+          {{ row.keyEnName }}
         </template>
       </el-table-column>
-      <el-table-column label="头像" prop="avatar" sortable="custom">
-        <template v-slot:default="{ row }: UserScope">
-          <el-avatar :src="row.avatar" alt=""></el-avatar>
+      <el-table-column label="字典编号" prop="dictId" sortable="custom">
+        <template v-slot:default="{ row }: DictScope">
+          {{ row.dictId }}
         </template>
       </el-table-column>
-      <el-table-column label="性别" prop="gender" sortable="custom">
-        <template v-slot:default="{ row }: UserScope">
-          <dict-column :dict-id="DictConstants.GENDER" :value="row.gender"></dict-column>
+      <el-table-column label="字典名称" prop="dictName" sortable="custom">
+        <template v-slot:default="{ row }: DictScope">
+          {{ row.dictName }}
+        </template>
+      </el-table-column>
+      <el-table-column label="字段英文名称" prop="dictEnName" sortable="custom">
+        <template v-slot:default="{ row }: DictScope">
+          {{ row.dictEnName }}
+        </template>
+      </el-table-column>
+      <el-table-column label="排序号" prop="orderNum" sortable="custom">
+        <template v-slot:default="{ row }: DictScope">
+          {{ row.orderNum }}
         </template>
       </el-table-column>
       <el-table-column label="创建时间" prop="createdTime" sortable="custom">
-        <template v-slot:default="{ row }: UserScope">
+        <template v-slot:default="{ row }: DictScope">
           {{ row.createdTime }}
         </template>
       </el-table-column>
       <el-table-column label="更新时间" prop="editedTime" sortable="custom">
-        <template v-slot:default="{ row }: UserScope">
+        <template v-slot:default="{ row }: DictScope">
           {{ row.editedTime }}
+        </template>
+      </el-table-column>
+      <el-table-column label="创建人" prop="creator.phone" sortable="custom" show-overflow-tooltip>
+        <template v-slot:default="{ row }: DictScope">
+          {{ row.creator.nickname }}({{ row.creator.phone }})
+        </template>
+      </el-table-column>
+      <el-table-column label="更新人" prop="editor.phone" sortable="custom" show-overflow-tooltip>
+        <template v-slot:default="{ row }: DictScope">
+          {{ row.editor.nickname }}({{ row.editor.phone }})
         </template>
       </el-table-column>
       <el-table-column label="操作" fixed="right" width="{280}">

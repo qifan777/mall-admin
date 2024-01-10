@@ -1,3 +1,5 @@
+import type { Gender } from '../enums/'
+
 export type UserDto = {
   /**
    */
@@ -9,6 +11,6 @@ export type UserDto = {
     password: string
     nickname?: string | undefined
     avatar?: string | undefined
-    gender?: string | undefined
+    gender?: Gender | undefined
   }
 }

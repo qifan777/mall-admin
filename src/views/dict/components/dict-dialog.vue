@@ -1,17 +1,17 @@
 <script lang="ts" setup>
 import { type Component } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useUserStore } from '../store/user-store'
-import UserCreateForm from './user-create-form.vue'
-import UserUpdateForm from './user-update-form.vue'
+import { useDictStore } from '../store/dict-store'
+import DictCreateForm from './dict-create-form.vue'
+import DictUpdateForm from './dict-update-form.vue'
 import type { EditMode } from '@/typings'
 
-const userStore = useUserStore()
-const { dialogData } = storeToRefs(userStore)
+const dictStore = useDictStore()
+const { dialogData } = storeToRefs(dictStore)
 
 const formMap: Record<EditMode, Component> = {
-  CREATE: UserCreateForm,
-  UPDATE: UserUpdateForm
+  CREATE: DictCreateForm,
+  UPDATE: DictUpdateForm
 }
 </script>
 <template>

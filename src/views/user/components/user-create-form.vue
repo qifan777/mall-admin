@@ -6,7 +6,9 @@ import { assertFormValidate, assertSuccess } from '@/utils/common'
 import { api } from '@/utils/api-instance'
 import ImageUpload from '@/components/image/image-upload.vue'
 import FooterButton from '@/components/base/dialog/footer-button.vue'
+import DictSelect from '@/components/dict/dict-select.vue'
 import type { FormInstance, FormRules } from 'element-plus'
+import { DictConstants } from '@/apis/__generated/model/enums/DictConstants'
 
 const userStore = useUserStore()
 const { closeDialog, reloadTableData } = userStore
@@ -57,8 +59,8 @@ const handleConfirm = () => {
       <el-form-item label="头像" prop="avatar">
         <image-upload v-model="createForm.avatar"></image-upload>
       </el-form-item>
-      <el-form-item label="性比" prop="gender">
-        <el-input v-model="createForm.gender"></el-input>
+      <el-form-item label="性别" prop="gender">
+        <dict-select :dict-id="DictConstants.GENDER" v-model="createForm.gender"></dict-select>
       </el-form-item>
     </el-form>
     <footer-button @close="closeDialog" @confirm="handleConfirm"></footer-button>

@@ -13,8 +13,7 @@ const generatePath = 'src/apis/__generated'
 console.log('Downloading ' + sourceUrl + '...')
 
 const tmpFile = fs.createWriteStream(tmpFilePath)
-
-const request = http.get(sourceUrl, (response) => {
+http.get(sourceUrl, (response) => {
   response.pipe(tmpFile)
   tmpFile.on('finish', () => {
     tmpFile.close()
@@ -30,11 +29,6 @@ const request = http.get(sourceUrl, (response) => {
     // Unzip the file using adm-zip
     console.log('Unzipping the file...')
     const zip = new AdmZip(tmpFilePath)
-    // zip.getEntries().forEach((entry) => {
-    //   if (!entry.entryName.includes('QueryRequest')) {
-    //     zip.extractEntryTo(entry, generatePath, true, true)
-    //   }
-    // })
     zip.extractAllTo(generatePath, true)
     console.log('File unzipped successfully.')
     // Remove the temporary file
@@ -48,6 +42,7 @@ const request = http.get(sourceUrl, (response) => {
     })
     traverseDirectory(modelPath)
     traverseDirectory(servicePath)
+    getDictConstants()
   })
 })
 
@@ -83,4 +78,11 @@ function replaceInFile(filePath) {
   fs.writeFileSync(filePath, updatedContent, 'utf8')
 }
 
-// 执行替换操作
+const getDictConstants = () => {
+  const dict = fs.createWriteStream('src/apis/__generated/model/enums/DictConstants.ts')
+  http.get('http://localhost:8877/dict/ts', (response) => {
+    response.on('data', (chunk) => {
+      dict.write(chunk.toString())
+    })
+  })
+}

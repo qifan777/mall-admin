@@ -5,7 +5,6 @@ import { useQueryHelper } from '@/components/base/query/query-helper'
 import type { UserInput, UserSpec } from '@/apis/__generated/model/static'
 import { api } from '@/utils/api-instance'
 import { ref } from 'vue'
-import type { UserDto } from '@/apis/__generated/model/dto'
 
 export const useUserStore = defineStore('user', () => {
   const initQuery: UserSpec = {}

@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import RegisterView from '@/views/login/register-view.vue'
 import LoginView from '@/views/login/login-view.vue'
 import DictView from '@/views/dict/dict-view.vue'
+import RoleView from '@/views/role/role-view.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,6 +22,11 @@ const router = createRouter({
       path: '/dict',
       name: 'dict',
       component: DictView
+    },
+    {
+      path: '/role',
+      name: 'role',
+      component: RoleView
     }
   ]
 })

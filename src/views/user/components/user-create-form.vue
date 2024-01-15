@@ -9,6 +9,7 @@ import FooterButton from '@/components/base/dialog/footer-button.vue'
 import DictSelect from '@/components/dict/dict-select.vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import { DictConstants } from '@/apis/__generated/model/enums/DictConstants'
+import RemoteSelect from '@/components/base/form/remote-select.vue'
 
 const userStore = useUserStore()
 const { closeDialog, reloadTableData } = userStore
@@ -43,6 +44,9 @@ const handleConfirm = () => {
     )
   )
 }
+const roleQueryOptions = async (keyword: string) => {
+  return (await api.roleController.query({ body: { query: { name: keyword } } })).content
+}
 </script>
 <template>
   <div class="create-form">
@@ -61,6 +65,15 @@ const handleConfirm = () => {
       </el-form-item>
       <el-form-item label="性别" prop="gender">
         <dict-select :dict-id="DictConstants.GENDER" v-model="createForm.gender"></dict-select>
+      </el-form-item>
+      <el-form-item label="角色">
+        <remote-select
+          :query-options="roleQueryOptions"
+          v-model="createForm.roleIds"
+          label-prop="name"
+          multiple
+        >
+        </remote-select>
       </el-form-item>
     </el-form>
     <footer-button @close="closeDialog" @confirm="handleConfirm"></footer-button>

@@ -7,13 +7,17 @@ export interface OptionItem {
 }
 const props = withDefaults(
   defineProps<{
-    modelValue: string[] | string
+    modelValue: string[] | string | undefined
     queryOptions: (query: string) => Promise<Record<string, any>[]>
     multiple?: boolean
     labelProp: string
     valueProp?: string
   }>(),
-  { multiple: false, valueProp: 'id' }
+  {
+    multiple: false,
+    valueProp: 'id',
+    modelValue: ''
+  }
 )
 const emit = defineEmits<{ 'update:modelValue': [value: string | string[]] }>()
 
@@ -22,7 +26,7 @@ const loading = ref(false)
 const remoteMethod = (keyword: string, enforce: boolean = false) => {
   if (keyword || enforce) {
     loading.value = true
-    props.queryOptions(keyword).then((res) => {
+    props.queryOptions(keyword.trim()).then((res) => {
       options.value = res.map((row) => {
         return {
           label: row[props.labelProp] as string,
@@ -49,7 +53,7 @@ onMounted(() => {
     filterable
     :multiple="multiple"
     remote
-    remote-show-suffix
+    :remote-show-suffix="true"
     :remote-method="remoteMethod"
     :loading="loading"
     @change="handleChange"

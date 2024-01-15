@@ -1,4 +1,5 @@
 export { AuthController } from './AuthController'
 export { DictController } from './DictController'
+export { RoleController } from './RoleController'
 export { UserController } from './UserController'
 export { UserWeChatController } from './UserWeChatController'

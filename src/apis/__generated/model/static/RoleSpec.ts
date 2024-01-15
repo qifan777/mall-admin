@@ -1,9 +1,6 @@
-/**
- * Entity for table "user_wechat"
- */
-export interface UserWeChatSpec {
+export interface RoleSpec {
+  name?: string | undefined
   id?: string | undefined
-  openId?: string | undefined
   minEditedTime?: string | undefined
   maxEditedTime?: string | undefined
   minCreatedTime?: string | undefined

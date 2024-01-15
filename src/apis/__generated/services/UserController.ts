@@ -1,5 +1,5 @@
 import type { Executor } from '../'
-import type { UserDto } from '../model/dto/'
+import type { RoleDto, UserDto } from '../model/dto/'
 import type {
   Page,
   QueryRequest,
@@ -33,6 +33,17 @@ export class UserController {
     const _uri = '/user/user-info'
     return (await this.executor({ uri: _uri, method: 'GET' })) as Promise<
       UserDto['UserRepository/COMPLEX_FETCHER']
+    >
+  }
+
+  async getUserRoles(
+    options: UserControllerOptions['getUserRoles']
+  ): Promise<Array<RoleDto['RoleRepository/SIMPLE_FETCHER']>> {
+    let _uri = '/user/'
+    _uri += encodeURIComponent(options.id)
+    _uri += '/roles'
+    return (await this.executor({ uri: _uri, method: 'GET' })) as Promise<
+      Array<RoleDto['RoleRepository/SIMPLE_FETCHER']>
     >
   }
 
@@ -79,5 +90,8 @@ export type UserControllerOptions = {
   getUserInfo: {}
   register: {
     body: UserRegisterInput
+  }
+  getUserRoles: {
+    id: string
   }
 }

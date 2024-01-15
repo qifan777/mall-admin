@@ -7,4 +7,5 @@ export interface UserInput {
   avatar?: string | undefined
   gender?: Gender | undefined
   id?: string | undefined
+  roleIds: Array<string>
 }

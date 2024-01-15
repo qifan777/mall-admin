@@ -27,9 +27,9 @@ export class DictController {
     return (await this.executor({ uri: _uri, method: 'GET' })) as Promise<void>
   }
 
-  async generateTS(): Promise<void> {
+  async generateTS(): Promise<Array<number>> {
     const _uri = '/dict/ts'
-    return (await this.executor({ uri: _uri, method: 'GET' })) as Promise<void>
+    return (await this.executor({ uri: _uri, method: 'GET' })) as Promise<Array<number>>
   }
 
   async query(

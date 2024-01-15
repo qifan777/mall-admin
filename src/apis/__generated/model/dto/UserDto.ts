@@ -12,5 +12,9 @@ export type UserDto = {
     nickname?: string | undefined
     avatar?: string | undefined
     gender?: Gender | undefined
+    rolesView: Array<{
+      id: string
+      name: string
+    }>
   }
 }

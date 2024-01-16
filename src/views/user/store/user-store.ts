@@ -8,7 +8,7 @@ import { ref } from 'vue'
 
 export const useUserStore = defineStore('user', () => {
   const initQuery: UserSpec = {}
-  const initForm: UserInput = { password: '', phone: '' }
+  const initForm: UserInput = { roleIds: [], password: '', phone: '' }
   const tableHelper = useTableHelper(api.userController.query, api.userController, initQuery)
   const dialogHelper = useDialogHelper()
   const queryHelper = useQueryHelper<UserSpec>(initQuery)

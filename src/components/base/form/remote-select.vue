@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { ElOption, ElSelect } from 'element-plus'
 export interface OptionItem {
   label: string
@@ -8,7 +8,10 @@ export interface OptionItem {
 const props = withDefaults(
   defineProps<{
     modelValue: string[] | string | undefined
-    queryOptions: (query: string) => Promise<Record<string, any>[]>
+    queryOptions: (
+      query: string,
+      defaultValue?: string[] | string | undefined
+    ) => Promise<Record<string, any>[]>
     multiple?: boolean
     labelProp: string
     valueProp?: string
@@ -23,7 +26,7 @@ const emit = defineEmits<{ 'update:modelValue': [value: string | string[]] }>()
 
 const options = ref<OptionItem[]>([])
 const loading = ref(false)
-const remoteMethod = (keyword: string, enforce: boolean = false) => {
+const remoteMethod = (keyword: string, enforce: boolean) => {
   if (keyword || enforce) {
     loading.value = true
     props.queryOptions(keyword.trim()).then((res) => {
@@ -40,10 +43,35 @@ const remoteMethod = (keyword: string, enforce: boolean = false) => {
 const handleChange = (value: string[] | string) => {
   emit('update:modelValue', value)
 }
-
 onMounted(() => {
   remoteMethod('', true)
 })
+const isInit = ref(false)
+watch(
+  () => props.modelValue,
+  (value) => {
+    if (value && value.length > 0 && !isInit.value) {
+      props.queryOptions('', value).then((res) => {
+        const mapRes = res.map((row) => {
+          return {
+            label: row[props.labelProp] as string,
+            value: row[props.valueProp]
+          } satisfies OptionItem
+        })
+        options.value = [
+          ...options.value.filter(
+            (option) => mapRes.findIndex((row) => row.value === option.value) < 0
+          ),
+          ...mapRes
+        ]
+      })
+      isInit.value = true
+    }
+  },
+  {
+    immediate: true
+  }
+)
 </script>
 <template>
   <el-select
@@ -53,7 +81,7 @@ onMounted(() => {
     filterable
     :multiple="multiple"
     remote
-    :remote-show-suffix="true"
+    remote-show-suffix
     :remote-method="remoteMethod"
     :loading="loading"
     @change="handleChange"

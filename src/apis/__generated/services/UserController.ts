@@ -1,5 +1,5 @@
 import type { Executor } from '../'
-import type { RoleDto, UserDto } from '../model/dto/'
+import type { UserDto } from '../model/dto/'
 import type {
   Page,
   QueryRequest,
@@ -21,29 +21,18 @@ export class UserController {
 
   async findById(
     options: UserControllerOptions['findById']
-  ): Promise<UserDto['UserRepository/COMPLEX_FETCHER']> {
+  ): Promise<UserDto['UserRepository/USER_ROLE_FETCHER']> {
     let _uri = '/user/'
     _uri += encodeURIComponent(options.id)
     return (await this.executor({ uri: _uri, method: 'GET' })) as Promise<
-      UserDto['UserRepository/COMPLEX_FETCHER']
+      UserDto['UserRepository/USER_ROLE_FETCHER']
     >
   }
 
-  async getUserInfo(): Promise<UserDto['UserRepository/COMPLEX_FETCHER']> {
+  async getUserInfo(): Promise<UserDto['UserRepository/USER_ROLE_FETCHER']> {
     const _uri = '/user/user-info'
     return (await this.executor({ uri: _uri, method: 'GET' })) as Promise<
-      UserDto['UserRepository/COMPLEX_FETCHER']
-    >
-  }
-
-  async getUserRoles(
-    options: UserControllerOptions['getUserRoles']
-  ): Promise<Array<RoleDto['RoleRepository/SIMPLE_FETCHER']>> {
-    let _uri = '/user/'
-    _uri += encodeURIComponent(options.id)
-    _uri += '/roles'
-    return (await this.executor({ uri: _uri, method: 'GET' })) as Promise<
-      Array<RoleDto['RoleRepository/SIMPLE_FETCHER']>
+      UserDto['UserRepository/USER_ROLE_FETCHER']
     >
   }
 
@@ -90,8 +79,5 @@ export type UserControllerOptions = {
   getUserInfo: {}
   register: {
     body: UserRegisterInput
-  }
-  getUserRoles: {
-    id: string
   }
 }

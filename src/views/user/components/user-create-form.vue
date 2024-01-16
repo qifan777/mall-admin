@@ -44,8 +44,9 @@ const handleConfirm = () => {
     )
   )
 }
-const roleQueryOptions = async (keyword: string) => {
-  return (await api.roleController.query({ body: { query: { name: keyword } } })).content
+const roleQueryOptions = async (keyword: string, roleIds: string[]) => {
+  return (await api.roleController.query({ body: { query: { name: keyword, ids: roleIds } } }))
+    .content
 }
 </script>
 <template>

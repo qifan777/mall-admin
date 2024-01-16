@@ -3,6 +3,7 @@ import RegisterView from '@/views/login/register-view.vue'
 import LoginView from '@/views/login/login-view.vue'
 import DictView from '@/views/dict/dict-view.vue'
 import RoleView from '@/views/role/role-view.vue'
+import MenuView from '@/views/menu/menu-view.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,6 +28,11 @@ const router = createRouter({
       path: '/role',
       name: 'role',
       component: RoleView
+    },
+    {
+      path: '/menu',
+      name: 'menu',
+      component: MenuView
     }
   ]
 })

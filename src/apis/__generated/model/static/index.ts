@@ -1,5 +1,7 @@
 export type { DictInput } from './DictInput'
 export type { DictSpec } from './DictSpec'
+export type { MenuInput } from './MenuInput'
+export type { MenuSpec } from './MenuSpec'
 export type { Page } from './Page'
 export type { Pageable } from './Pageable'
 export type { PhonePasswordAuth } from './PhonePasswordAuth'

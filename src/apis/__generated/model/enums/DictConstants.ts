@@ -1,10 +1,39 @@
 import type { DictInput } from '@/apis/__generated/model/static'
 
 export const DictConstants = {
-  GENDER: 1001,
-  SYSTEM_CONSTANT: 1002
+  MENU_TYPE: 1002,
+  GENDER: 1001
 }
 export const Dictionaries: { [index: string]: { [index: string]: DictInput } } = {
+  MenuType: {
+    BUTTON: {
+      keyId: 2,
+      keyName: '按钮',
+      keyEnName: 'BUTTON',
+      dictId: 1002,
+      dictName: '菜单类型',
+      dictEnName: 'MENU_TYPE',
+      orderNum: 2
+    },
+    PAGE: {
+      keyId: 0,
+      keyName: '页面',
+      keyEnName: 'PAGE',
+      dictId: 1002,
+      dictName: '菜单类型',
+      dictEnName: 'MENU_TYPE',
+      orderNum: 1
+    },
+    DIRECTORY: {
+      keyId: 1,
+      keyName: '目录',
+      keyEnName: 'DIRECTORY',
+      dictId: 1002,
+      dictName: '菜单类型',
+      dictEnName: 'MENU_TYPE',
+      orderNum: 0
+    }
+  },
   Gender: {
     PRIVATE: {
       keyId: 2,
@@ -32,17 +61,6 @@ export const Dictionaries: { [index: string]: { [index: string]: DictInput } } =
       dictName: '性别',
       dictEnName: 'GENDER',
       orderNum: 1
-    }
-  },
-  SystemConstant: {
-    ADMIN: {
-      keyId: 1,
-      keyName: '管理员',
-      keyEnName: 'ADMIN',
-      dictId: 1002,
-      dictName: '系统常量',
-      dictEnName: 'SYSTEM_CONSTANT',
-      orderNum: 0
     }
   }
 }

@@ -1,11 +1,14 @@
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia'
-import { reactive, ref, watch } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
 import { useRoleStore } from '../store/role-store'
 import { assertFormValidate, assertSuccess } from '@/utils/common'
 import { api } from '@/utils/api-instance'
 import FooterButton from '@/components/base/dialog/footer-button.vue'
 import type { FormInstance, FormRules } from 'element-plus'
+import type { MenuTreeDto } from '@/typings'
+import MenuTree from '@/views/menu/components/menu-tree.vue'
+import { buildMenuTree } from '@/views/menu/store/menu-store'
 
 const roleStore = useRoleStore()
 const { closeDialog, reloadTableData } = roleStore
@@ -16,8 +19,10 @@ const rules = reactive<FormRules<typeof updateForm>>({
 })
 const init = async () => {
   dialogData.value.title = '编辑'
+  const res = await api.roleController.findById({ id: updateForm.value.id || '' })
   updateForm.value = {
-    ...(await api.roleController.findById({ id: updateForm.value.id || '' }))
+    ...res,
+    menuIds: res.menusView.map((menu) => menu.id)
   }
 }
 watch(
@@ -41,6 +46,19 @@ const handleConfirm = () => {
     })
   )
 }
+const menuTreeList = ref<MenuTreeDto[]>([])
+onMounted(() => {
+  api.menuController.query({ body: { pageNum: 1, query: {}, pageSize: 100000 } }).then((res) => {
+    menuTreeList.value = buildMenuTree(null, res.content)
+    console.log(menuTreeList.value)
+  })
+})
+const handleNodeCheckChange = (
+  value1: MenuTreeDto,
+  value2: { checkedNodes: MenuTreeDto[]; checkedKeys: string[] }
+) => {
+  updateForm.value.menuIds = value2.checkedKeys
+}
 </script>
 <template>
   <div class="update-form">
@@ -49,7 +67,20 @@ const handleConfirm = () => {
         <el-input v-model="updateForm.name"></el-input>
       </el-form-item>
     </el-form>
-    <footer-button @close="closeDialog" @confirm="handleConfirm"></footer-button>
+    <el-form-item label="菜单">
+      <menu-tree
+        :key="updateForm.id"
+        :menu-tree="menuTreeList"
+        show-checkbox
+        check-strictly
+        nodeKey="id"
+        @check="handleNodeCheckChange"
+        :default-checked-keys="updateForm.menuIds"
+      >
+        <template v-slot:default="{ node }">{{ node.label }} </template>
+      </menu-tree>
+    </el-form-item>
+    <FooterButton @close="closeDialog" @confirm="handleConfirm"></FooterButton>
   </div>
 </template>
 

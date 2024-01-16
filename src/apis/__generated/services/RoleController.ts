@@ -14,11 +14,11 @@ export class RoleController {
 
   async findById(
     options: RoleControllerOptions['findById']
-  ): Promise<RoleDto['RoleRepository/COMPLEX_FETCHER']> {
+  ): Promise<RoleDto['RoleRepository/ROLE_MENU_FETCHER']> {
     let _uri = '/role/'
     _uri += encodeURIComponent(options.id)
     return (await this.executor({ uri: _uri, method: 'GET' })) as Promise<
-      RoleDto['RoleRepository/COMPLEX_FETCHER']
+      RoleDto['RoleRepository/ROLE_MENU_FETCHER']
     >
   }
 

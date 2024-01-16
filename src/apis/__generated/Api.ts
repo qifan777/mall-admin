@@ -2,6 +2,7 @@ import type { Executor } from './'
 import {
   AuthController,
   DictController,
+  MenuController,
   RoleController,
   UserController,
   UserWeChatController
@@ -12,6 +13,8 @@ export class Api {
 
   readonly dictController: DictController
 
+  readonly menuController: MenuController
+
   readonly roleController: RoleController
 
   readonly userController: UserController
@@ -21,6 +24,7 @@ export class Api {
   constructor(executor: Executor) {
     this.authController = new AuthController(executor)
     this.dictController = new DictController(executor)
+    this.menuController = new MenuController(executor)
     this.roleController = new RoleController(executor)
     this.userController = new UserController(executor)
     this.userWeChatController = new UserWeChatController(executor)

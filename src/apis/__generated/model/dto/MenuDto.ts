@@ -1,11 +1,18 @@
-export type RoleDto = {
+import type { MenuType } from '../enums/'
+
+export type MenuDto = {
   /**
    */
-  'RoleRepository/COMPLEX_FETCHER': {
+  'MenuRepository/COMPLEX_FETCHER': {
     id: string
     createdTime: string
     editedTime: string
     name: string
+    parentId?: string | undefined
+    path: string
+    orderNum?: number | undefined
+    menuType: MenuType
+    icon?: string | undefined
     creator: {
       id: string
       phone: string
@@ -16,16 +23,5 @@ export type RoleDto = {
       phone: string
       nickname?: string | undefined
     }
-  }
-  /**
-   */
-  'RoleRepository/ROLE_MENU_FETCHER': {
-    id: string
-    createdTime: string
-    editedTime: string
-    name: string
-    menusView: Array<{
-      id: string
-    }>
   }
 }

@@ -4,6 +4,7 @@ import {
   DictController,
   MenuController,
   ProductCategoryController,
+  ProductController,
   RoleController,
   UserController,
   UserWeChatController
@@ -18,6 +19,8 @@ export class Api {
 
   readonly productCategoryController: ProductCategoryController
 
+  readonly productController: ProductController
+
   readonly roleController: RoleController
 
   readonly userController: UserController
@@ -29,6 +32,7 @@ export class Api {
     this.dictController = new DictController(executor)
     this.menuController = new MenuController(executor)
     this.productCategoryController = new ProductCategoryController(executor)
+    this.productController = new ProductController(executor)
     this.roleController = new RoleController(executor)
     this.userController = new UserController(executor)
     this.userWeChatController = new UserWeChatController(executor)

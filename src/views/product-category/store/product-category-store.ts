@@ -5,10 +5,10 @@ import { useQueryHelper } from '@/components/base/query/query-helper'
 import type { ProductCategoryInput, ProductCategorySpec } from '@/apis/__generated/model/static'
 import { api } from '@/utils/api-instance'
 import { ref } from 'vue'
-export const categoryQueryOption = async (keyword: string, parentId: string) => {
+export const categoryQueryOption = async (keyword: string, id: string) => {
   return (
     await api.productCategoryController.query({
-      body: { query: { name: keyword, id: parentId } }
+      body: { query: { name: keyword, id } }
     })
   ).content
 }

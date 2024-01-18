@@ -7,6 +7,7 @@ import MenuView from '@/views/menu/menu-view.vue'
 import LayoutView from '@/layout/layout-view.vue'
 import { useHomeStore } from '@/stores/home-store'
 import ProductCategoryView from '@/views/product-category/product-category-view.vue'
+import ProductView from '@/views/product/product-view.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,6 +32,11 @@ const router = createRouter({
           path: '/product-category',
           name: 'product-category-view',
           component: ProductCategoryView
+        },
+        {
+          path: '/product',
+          name: 'product',
+          component: ProductView
         }
       ]
     },

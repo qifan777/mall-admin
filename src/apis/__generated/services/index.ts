@@ -1,6 +1,7 @@
 export { AuthController } from './AuthController'
 export { DictController } from './DictController'
 export { MenuController } from './MenuController'
+export { ProductCategoryController } from './ProductCategoryController'
 export { RoleController } from './RoleController'
 export { UserController } from './UserController'
 export { UserWeChatController } from './UserWeChatController'

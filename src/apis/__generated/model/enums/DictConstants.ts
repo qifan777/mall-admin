@@ -35,8 +35,17 @@ export const Dictionaries: { [index: string]: { [index: string]: DictInput } } =
     }
   },
   Gender: {
+    PRIVATE: {
+      keyId: 2,
+      keyName: '保密',
+      keyEnName: 'PRIVATE',
+      dictId: 1001,
+      dictName: '性别',
+      dictEnName: 'GENDER',
+      orderNum: 0
+    },
     MALE: {
-      keyId: 1,
+      keyId: 0,
       keyName: '男',
       keyEnName: 'MALE',
       dictId: 1001,
@@ -45,7 +54,7 @@ export const Dictionaries: { [index: string]: { [index: string]: DictInput } } =
       orderNum: 0
     },
     FEMALE: {
-      keyId: 2,
+      keyId: 1,
       keyName: '女',
       keyEnName: 'FEMALE',
       dictId: 1001,

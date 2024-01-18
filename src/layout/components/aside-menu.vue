@@ -5,6 +5,7 @@ import { useHomeStore } from '@/stores/home-store'
 import type { MenuTreeDto } from '@/typings'
 import { useRoute } from 'vue-router'
 import router from '@/router'
+import { useTagStore } from '@/layout/store/tag-store'
 export default defineComponent({
   components: {},
   props: {
@@ -16,7 +17,7 @@ export default defineComponent({
   setup(props) {
     // 获取全局缓存的菜单树
     const homeStore = useHomeStore()
-    const route = useRoute()
+    const tagStore = useTagStore()
     // tsx递归生成菜单树
     const subMenuList = (menuList: MenuTreeDto[], depth: number) => {
       menuList = menuList.sort((a, b) => (a.orderNum ?? 999) - (b.orderNum ?? 999))
@@ -45,7 +46,7 @@ export default defineComponent({
               class={depth === 0 ? 'root' : ''}
               key={menu.path}
               index={menu.path}
-              onClick={() => router.push(menu.path)}
+              onClick={() => tagStore.openTag(menu.path)}
             >
               {{
                 default: () => {
@@ -71,7 +72,7 @@ export default defineComponent({
       })
     }
     return () => (
-      <ElMenu collapse={props.collapse} defaultActive={route.path}>
+      <ElMenu collapse={props.collapse} defaultActive={tagStore.activeTag.path}>
         {subMenuList(homeStore.menuTreeList, 0)}
       </ElMenu>
     )

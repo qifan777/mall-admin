@@ -5,6 +5,7 @@ import DictView from '@/views/dict/dict-view.vue'
 import RoleView from '@/views/role/role-view.vue'
 import MenuView from '@/views/menu/menu-view.vue'
 import LayoutView from '@/layout/layout-view.vue'
+import { useHomeStore } from '@/stores/home-store'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,5 +45,17 @@ const router = createRouter({
     }
   ]
 })
-
+// 添加路由拦截，在进入路由之前需要校验是否有该菜单的权限
+const whiteList = ['/login', '/register', '/']
+router.beforeEach(async (to, from, next) => {
+  const homeStore = useHomeStore()
+  if (
+    whiteList.includes(to.path) ||
+    (await homeStore.getMenuList()).findIndex((menu) => menu.path === to.path) >= 0
+  ) {
+    next()
+  } else {
+    return next('/')
+  }
+})
 export default router

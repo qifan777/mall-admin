@@ -5,6 +5,7 @@ import { Avatar, Fold } from '@element-plus/icons-vue'
 import { useHomeStore } from '@/stores/home-store'
 import { storeToRefs } from 'pinia'
 import logo from '@/assets/logo.jpg'
+import RouterTags from '@/layout/components/router-tags.vue'
 const isCollapse = ref(false)
 const homeStore = useHomeStore()
 const { userInfo } = storeToRefs(homeStore)
@@ -47,6 +48,7 @@ const { userInfo } = storeToRefs(homeStore)
               <fold></fold>
             </el-icon>
           </div>
+          <router-tags></router-tags>
         </el-header>
         <!-- 对应绿色的下半部分，展示子路由 -->
         <el-scrollbar class="router">

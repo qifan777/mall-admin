@@ -24,4 +24,17 @@ export type MenuDto = {
       nickname?: string | undefined
     }
   }
+  /**
+   */
+  'MenuRepository/SIMPLE_FETCHER': {
+    id: string
+    createdTime: string
+    editedTime: string
+    name: string
+    parentId?: string | undefined
+    path: string
+    orderNum?: number | undefined
+    menuType: MenuType
+    icon?: string | undefined
+  }
 }

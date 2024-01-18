@@ -79,7 +79,7 @@ const menuQueryOptions = async (keyword: string, parentId: string) => {
         <dict-select :dict-id="DictConstants.MENU_TYPE" v-model="createForm.menuType"></dict-select>
       </el-form-item>
       <el-form-item label="图标" prop="icon">
-        <image-upload v-model="createForm.icon"></image-upload>
+        <el-input v-model.trim="createForm.icon"></el-input>
       </el-form-item>
     </el-form>
     <footer-button @close="closeDialog" @confirm="handleConfirm"></footer-button>

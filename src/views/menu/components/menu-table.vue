@@ -107,7 +107,7 @@ const handleDelete = (ids: string[]) => {
       </el-table-column>
       <el-table-column label="图标" prop="icon" sortable="custom">
         <template v-slot:default="{ row }: MenuScope">
-          <el-avatar :src="row.icon" alt=""></el-avatar>
+          <component :is="row.icon" v-if="row.icon"></component>
         </template>
       </el-table-column>
       <el-table-column label="创建时间" prop="createdTime" sortable="custom">

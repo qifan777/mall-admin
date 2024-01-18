@@ -1,5 +1,5 @@
 import type { Executor } from '../'
-import type { UserDto } from '../model/dto/'
+import type { MenuDto, UserDto } from '../model/dto/'
 import type {
   Page,
   QueryRequest,
@@ -33,6 +33,13 @@ export class UserController {
     const _uri = '/user/user-info'
     return (await this.executor({ uri: _uri, method: 'GET' })) as Promise<
       UserDto['UserRepository/USER_ROLE_FETCHER']
+    >
+  }
+
+  async getUserMenus(): Promise<Array<MenuDto['MenuRepository/SIMPLE_FETCHER']>> {
+    const _uri = '/user/menus'
+    return (await this.executor({ uri: _uri, method: 'GET' })) as Promise<
+      Array<MenuDto['MenuRepository/SIMPLE_FETCHER']>
     >
   }
 
@@ -80,4 +87,5 @@ export type UserControllerOptions = {
   register: {
     body: UserRegisterInput
   }
+  getUserMenus: {}
 }

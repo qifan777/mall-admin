@@ -14,4 +14,4 @@ export interface Result<T> {
 }
 export type MenuTreeDto = {
   children?: MenuTreeDto[]
-} & MenuDto['MenuRepository/COMPLEX_FETCHER']
+} & MenuDto['MenuRepository/SIMPLE_FETCHER']

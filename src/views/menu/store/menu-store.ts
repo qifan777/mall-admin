@@ -9,7 +9,7 @@ import type { MenuTreeDto } from '@/typings'
 
 export const useMenuStore = defineStore('menu', () => {
   const initQuery: MenuSpec = {}
-  const initForm: MenuInput = { menuType: '', name: '', path: '' }
+  const initForm: MenuInput = { menuType: 'DIRECTORY', name: '', path: '' }
   const tableHelper = useTableHelper(api.menuController.query, api.menuController, initQuery)
   const dialogHelper = useDialogHelper()
   const queryHelper = useQueryHelper<MenuSpec>(initQuery)

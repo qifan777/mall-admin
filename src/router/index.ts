@@ -4,11 +4,29 @@ import LoginView from '@/views/login/login-view.vue'
 import DictView from '@/views/dict/dict-view.vue'
 import RoleView from '@/views/role/role-view.vue'
 import MenuView from '@/views/menu/menu-view.vue'
+import LayoutView from '@/layout/layout-view.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    { path: '/user', component: () => import('@/views/user/user-view.vue') },
+    {
+      path: '/',
+      name: 'layout-view',
+      component: LayoutView,
+      children: [
+        { path: '/user', component: () => import('@/views/user/user-view.vue') },
+        {
+          path: '/role',
+          name: 'role',
+          component: RoleView
+        },
+        {
+          path: '/menu',
+          name: 'menu',
+          component: MenuView
+        }
+      ]
+    },
     {
       path: '/login',
       name: 'login',
@@ -23,16 +41,6 @@ const router = createRouter({
       path: '/dict',
       name: 'dict',
       component: DictView
-    },
-    {
-      path: '/role',
-      name: 'role',
-      component: RoleView
-    },
-    {
-      path: '/menu',
-      name: 'menu',
-      component: MenuView
     }
   ]
 })

@@ -33,11 +33,8 @@
 import { ref, watch } from 'vue'
 import { Close, Plus } from '@element-plus/icons-vue'
 import ValuesInput from '@/views/product/components/values-input.vue'
+import type { Attribute } from '@/apis/__generated/model/static'
 
-type Attribute = {
-  name: string
-  values: string
-}
 const props = defineProps<{ modelValue?: Attribute[] }>()
 const emit = defineEmits<{
   change: [data: Attribute[]]
@@ -50,7 +47,7 @@ const deleteAttribute = (index: number) => {
 const addAttribute = () => {
   attributes.value.push({
     name: '',
-    values: ''
+    values: []
   })
 }
 watch(

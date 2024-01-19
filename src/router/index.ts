@@ -8,6 +8,7 @@ import LayoutView from '@/layout/layout-view.vue'
 import { useHomeStore } from '@/stores/home-store'
 import ProductCategoryView from '@/views/product-category/product-category-view.vue'
 import ProductView from '@/views/product/product-view.vue'
+import ProductSkuView from '@/views/product-sku/product-sku-view.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -35,8 +36,13 @@ const router = createRouter({
         },
         {
           path: '/product',
-          name: 'product',
+          name: 'product-view',
           component: ProductView
+        },
+        {
+          path: '/product-sku',
+          name: 'product-sku-view',
+          component: ProductSkuView
         }
       ]
     },

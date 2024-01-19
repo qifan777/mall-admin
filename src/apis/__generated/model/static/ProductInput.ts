@@ -1,8 +1,5 @@
 import type { Attribute } from './'
 
-/**
- * Entity for table "product"
- */
 export interface ProductInput {
   name: string
   price: number
@@ -10,7 +7,7 @@ export interface ProductInput {
   brand: string
   stock: number
   description: string
-  tags: string
+  tags: Array<string>
   categoryId: string
   attributes: Array<Attribute>
   specifications: Array<Attribute>

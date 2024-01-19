@@ -1,6 +1,3 @@
-/**
- * Entity for table "product_category"
- */
 export interface ProductCategorySpec {
   image?: string | undefined
   sortOrder?: number | undefined

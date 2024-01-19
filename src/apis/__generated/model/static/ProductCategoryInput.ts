@@ -1,6 +1,3 @@
-/**
- * Entity for table "product_category"
- */
 export interface ProductCategoryInput {
   name: string
   parentId?: string | undefined

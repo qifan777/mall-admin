@@ -8,10 +8,7 @@ export interface OptionItem {
 const props = withDefaults(
   defineProps<{
     modelValue: string[] | string | undefined
-    queryOptions: (
-      query: string,
-      defaultValue?: string[] | string | undefined
-    ) => Promise<Record<string, any>[]>
+    queryOptions: (query: string, defaultValue?: any) => Promise<any[]>
     multiple?: boolean
     labelProp: string
     valueProp?: string
@@ -22,7 +19,7 @@ const props = withDefaults(
     modelValue: ''
   }
 )
-const emit = defineEmits<{ 'update:modelValue': [value: string | string[]] }>()
+const emit = defineEmits<{ 'update:modelValue': [value: any] }>()
 
 const options = ref<OptionItem[]>([])
 const loading = ref(false)

@@ -5,6 +5,7 @@ import {
   MenuController,
   ProductCategoryController,
   ProductController,
+  ProductSkuController,
   RoleController,
   UserController,
   UserWeChatController
@@ -21,6 +22,8 @@ export class Api {
 
   readonly productController: ProductController
 
+  readonly productSkuController: ProductSkuController
+
   readonly roleController: RoleController
 
   readonly userController: UserController
@@ -33,6 +36,7 @@ export class Api {
     this.menuController = new MenuController(executor)
     this.productCategoryController = new ProductCategoryController(executor)
     this.productController = new ProductController(executor)
+    this.productSkuController = new ProductSkuController(executor)
     this.roleController = new RoleController(executor)
     this.userController = new UserController(executor)
     this.userWeChatController = new UserWeChatController(executor)

@@ -1,22 +1,17 @@
-import type { Attribute } from '../static/'
-
-export type ProductDto = {
+export type ProductSkuDto = {
   /**
    */
-  'ProductRepository/COMPLEX_FETCHER': {
+  'ProductSkuRepository/COMPLEX_FETCHER': {
     id: string
     createdTime: string
     editedTime: string
+    values: Array<string>
     name: string
-    price: number
     cover: string
-    brand: string
+    price: number
     stock: number
     description: string
-    tags: Array<string>
-    categoryId: string
-    attributes: Array<Attribute>
-    specifications: Array<Attribute>
+    productId: string
     creator: {
       id: string
       phone: string

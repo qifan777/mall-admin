@@ -49,16 +49,15 @@
 import { computed, nextTick, ref } from 'vue'
 import { ElButton, ElInput, ElTag } from 'element-plus'
 
-const props = defineProps({ modelValue: { type: String, required: false, default: '' } })
-const emit = defineEmits<{ 'update:modelValue': [values: string] }>()
+const props = defineProps({ modelValue: { type: Array<string>, required: false, default: '' } })
+const emit = defineEmits<{ 'update:modelValue': [values: string[]] }>()
 
 const tags = computed({
   get: () => {
-    console.log(props.modelValue)
-    return props.modelValue ? props.modelValue.split(',') : []
+    return props.modelValue ? props.modelValue : []
   },
   set: (values) => {
-    emit('update:modelValue', values.join(','))
+    emit('update:modelValue', values)
   }
 })
 // 编辑值

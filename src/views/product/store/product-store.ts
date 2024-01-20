@@ -5,10 +5,18 @@ import { useQueryHelper } from '@/components/base/query/query-helper'
 import type { ProductInput, ProductSpec } from '@/apis/__generated/model/static'
 import { api } from '@/utils/api-instance'
 import { ref } from 'vue'
+export const productQueryOption = async (keyword: string, id: string) => {
+  return (
+    await api.productController.query({
+      body: { query: { name: keyword, id } }
+    })
+  ).content
+}
 
 export const useProductStore = defineStore('product', () => {
   const initQuery: ProductSpec = {}
   const initForm: ProductInput = {
+    categoryId: '',
     attributes: [],
     brand: '',
     cover: '',

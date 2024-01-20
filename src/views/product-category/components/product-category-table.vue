@@ -5,14 +5,12 @@ import { assertSuccess } from '@/utils/common'
 import { api } from '@/utils/api-instance'
 import { ElMessageBox } from 'element-plus'
 import type { Scope } from '@/typings'
-import { useMenuStore } from '../store/menu-store'
-import type { MenuDto } from '@/apis/__generated/model/dto'
+import { useProductCategoryStore } from '../store/product-category-store'
+import type { ProductCategoryDto } from '@/apis/__generated/model/dto'
 import { Delete, Edit, Plus } from '@element-plus/icons-vue'
-import DictColumn from '@/components/dict/dict-column.vue'
-import { DictConstants } from '@/apis/__generated/model/enums/DictConstants'
 
-type MenuScope = Scope<MenuDto['MenuRepository/COMPLEX_FETCHER']>
-const menuStore = useMenuStore()
+type ProductCategoryScope = Scope<ProductCategoryDto['ProductCategoryRepository/COMPLEX_FETCHER']>
+const productCategoryStore = useProductCategoryStore()
 const {
   loadTableData,
   reloadTableData,
@@ -20,8 +18,9 @@ const {
   handleSortChange,
   handleSelectChange,
   getTableSelectedRows
-} = menuStore
-const { pageData, loading, queryRequest, table, updateForm, createForm } = storeToRefs(menuStore)
+} = productCategoryStore
+const { pageData, loading, queryRequest, table, updateForm, createForm } =
+  storeToRefs(productCategoryStore)
 onMounted(() => {
   reloadTableData()
 })
@@ -31,7 +30,7 @@ const handleEdit = (row: { id: string }) => {
 }
 const handleCreate = () => {
   openDialog('CREATE')
-  createForm.value = { ...menuStore.initForm }
+  createForm.value = { ...productCategoryStore.initForm }
 }
 const handleSingleDelete = (row: { id: string }) => {
   handleDelete([row.id])
@@ -49,7 +48,7 @@ const handleDelete = (ids: string[]) => {
     cancelButtonText: '取消',
     type: 'warning'
   }).then(() => {
-    api.menuController.delete({ body: ids }).then((res) => {
+    api.productCategoryController.delete({ body: ids }).then((res) => {
       assertSuccess(res).then(() => reloadTableData())
     })
   })
@@ -80,55 +79,48 @@ const handleDelete = (ids: string[]) => {
       v-loading="loading"
     >
       <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column label="菜单名称" prop="name" sortable="custom">
-        <template v-slot:default="{ row }: MenuScope">
+      <el-table-column label="名称" prop="name" sortable="custom">
+        <template v-slot:default="{ row }: ProductCategoryScope">
           {{ row.name }}
         </template>
       </el-table-column>
-      <el-table-column label="父菜单Id" prop="parentId" sortable="custom">
-        <template v-slot:default="{ row }: MenuScope">
+      <el-table-column label="父亲id" prop="parentId" sortable="custom">
+        <template v-slot:default="{ row }: ProductCategoryScope">
           {{ row.parentId }}
         </template>
       </el-table-column>
-      <el-table-column label="路由路径" prop="path" sortable="custom">
-        <template v-slot:default="{ row }: MenuScope">
-          {{ row.path }}
+      <el-table-column label="图片" prop="image" sortable="custom">
+        <template v-slot:default="{ row }: ProductCategoryScope">
+          <el-avatar :src="row.image" alt=""></el-avatar>
         </template>
       </el-table-column>
-      <el-table-column label="排序号" prop="orderNum" sortable="custom">
-        <template v-slot:default="{ row }: MenuScope">
-          {{ row.orderNum }}
+      <el-table-column label="描述" prop="description" sortable="custom">
+        <template v-slot:default="{ row }: ProductCategoryScope">
+          {{ row.description }}
         </template>
       </el-table-column>
-      <el-table-column label="菜单类型" prop="menuType" sortable="custom">
-        <template v-slot:default="{ row }: MenuScope">
-          <dict-column :dict-id="DictConstants.MENU_TYPE" :value="row.menuType"></dict-column>
-        </template>
-      </el-table-column>
-      <el-table-column label="图标" prop="icon" sortable="custom">
-        <template v-slot:default="{ row }: MenuScope">
-          <el-icon>
-            <component :is="row.icon" v-if="row.icon"></component>
-          </el-icon>
+      <el-table-column label="排序号" prop="sortOrder" sortable="custom">
+        <template v-slot:default="{ row }: ProductCategoryScope">
+          {{ row.sortOrder }}
         </template>
       </el-table-column>
       <el-table-column label="创建时间" prop="createdTime" sortable="custom">
-        <template v-slot:default="{ row }: MenuScope">
+        <template v-slot:default="{ row }: ProductCategoryScope">
           {{ row.createdTime }}
         </template>
       </el-table-column>
       <el-table-column label="更新时间" prop="editedTime" sortable="custom">
-        <template v-slot:default="{ row }: MenuScope">
+        <template v-slot:default="{ row }: ProductCategoryScope">
           {{ row.editedTime }}
         </template>
       </el-table-column>
       <el-table-column label="创建人" prop="creator.phone" sortable="custom" show-overflow-tooltip>
-        <template v-slot:default="{ row }: MenuScope">
+        <template v-slot:default="{ row }: ProductCategoryScope">
           {{ row.creator.nickname }}({{ row.creator.phone }})
         </template>
       </el-table-column>
       <el-table-column label="更新人" prop="editor.phone" sortable="custom" show-overflow-tooltip>
-        <template v-slot:default="{ row }: MenuScope">
+        <template v-slot:default="{ row }: ProductCategoryScope">
           {{ row.editor.nickname }}({{ row.editor.phone }})
         </template>
       </el-table-column>

@@ -18,7 +18,7 @@
           </el-input>
         </el-form-item>
         <el-form-item label="值列表">
-          <values-input v-model="keyValueList[index].values"></values-input>
+          <value-input v-model="keyValueList[index].values"></value-input>
         </el-form-item>
       </el-form>
     </div>
@@ -33,7 +33,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { Close, Plus } from '@element-plus/icons-vue'
-import ValuesInput from './value-input.vue'
+import ValueInput from './value-input.vue'
 import type { KeyValue } from '@/apis/__generated/model/static'
 
 const props = defineProps<{ modelValue?: KeyValue[] }>()

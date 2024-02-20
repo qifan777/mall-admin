@@ -2,6 +2,7 @@ import type { ProductOrderInput_TargetOf_items, ProductOrderInput_TargetOf_payme
 
 export interface ProductOrderInput {
   remark: string
+  trackingNumber?: string | undefined
   id?: string | undefined
   addressId: string
   items: Array<ProductOrderInput_TargetOf_items>

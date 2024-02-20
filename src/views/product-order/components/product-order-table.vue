@@ -6,6 +6,7 @@ import { useProductOrderStore } from '../store/product-order-store'
 import type { ProductOrderDto } from '@/apis/__generated/model/dto'
 import DictColumn from '@/components/dict/dict-column.vue'
 import { DictConstants } from '@/apis/__generated/model/enums/DictConstants'
+import DeliverDialog from '@/views/product-order/components/deliver-dialog.vue'
 
 type ProductOrderScope = Scope<ProductOrderDto['ProductOrderRepository/COMPLEX_FETCHER']>
 type ProductOrderItemScope = Scope<
@@ -154,8 +155,8 @@ onMounted(() => {
         </template>
       </el-table-column>
       <el-table-column fixed="right" label="操作">
-        <template v-slot:default="{ row }">
-          <div></div>
+        <template v-slot:default="{ row }: ProductOrderScope">
+          <deliver-dialog :id="row.id" v-if="row.status === 'TO_BE_DELIVERED'"></deliver-dialog>
         </template>
       </el-table-column>
     </el-table>

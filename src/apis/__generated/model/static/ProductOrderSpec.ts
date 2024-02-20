@@ -8,6 +8,7 @@ import type {
 
 export interface ProductOrderSpec {
   status?: ProductOrderStatus | undefined
+  trackingNumber?: string | undefined
   remark?: string | undefined
   id?: string | undefined
   minCreatedTime?: string | undefined

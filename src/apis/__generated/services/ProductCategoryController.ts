@@ -45,6 +45,7 @@ export class ProductCategoryController {
     })) as Promise<string>
   }
 }
+
 export type ProductCategoryControllerOptions = {
   findById: {
     id: string

@@ -1,10 +1,12 @@
 import type { Executor } from './'
 import {
+  AddressController,
   AuthController,
   DictController,
   MenuController,
   ProductCategoryController,
   ProductController,
+  ProductOrderController,
   ProductSkuController,
   RoleController,
   UserController,
@@ -12,11 +14,15 @@ import {
 } from './services/'
 
 export class Api {
+  readonly addressController: AddressController
+
   readonly authController: AuthController
 
   readonly dictController: DictController
 
   readonly menuController: MenuController
+
+  readonly productOrderController: ProductOrderController
 
   readonly productCategoryController: ProductCategoryController
 
@@ -31,9 +37,11 @@ export class Api {
   readonly userWeChatController: UserWeChatController
 
   constructor(executor: Executor) {
+    this.addressController = new AddressController(executor)
     this.authController = new AuthController(executor)
     this.dictController = new DictController(executor)
     this.menuController = new MenuController(executor)
+    this.productOrderController = new ProductOrderController(executor)
     this.productCategoryController = new ProductCategoryController(executor)
     this.productController = new ProductController(executor)
     this.productSkuController = new ProductSkuController(executor)

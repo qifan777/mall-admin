@@ -47,6 +47,7 @@ export class ProductSkuController {
     >
   }
 }
+
 export type ProductSkuControllerOptions = {
   findById: {
     id: string

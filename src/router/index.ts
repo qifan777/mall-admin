@@ -9,6 +9,7 @@ import { useHomeStore } from '@/stores/home-store'
 import ProductCategoryView from '@/views/product-category/product-category-view.vue'
 import ProductView from '@/views/product/product-view.vue'
 import ProductSkuView from '@/views/product-sku/product-sku-view.vue'
+import ProductOrderView from '@/views/product-order/product-order-view.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -43,6 +44,16 @@ const router = createRouter({
           path: '/product-sku',
           name: 'product-sku-view',
           component: ProductSkuView
+        },
+        {
+          path: '/dict',
+          name: 'dict',
+          component: DictView
+        },
+        {
+          path: '/product-order',
+          name: 'product-order-view',
+          component: ProductOrderView
         }
       ]
     },
@@ -55,11 +66,6 @@ const router = createRouter({
       path: '/register',
       name: 'register',
       component: RegisterView
-    },
-    {
-      path: '/dict',
-      name: 'dict',
-      component: DictView
     }
   ]
 })

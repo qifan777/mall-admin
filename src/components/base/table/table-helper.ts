@@ -2,6 +2,7 @@ import { ElTable } from 'element-plus'
 import { type Ref, ref } from 'vue'
 import type { Page, QueryRequest } from '@/apis/__generated/model/static'
 import _ from 'lodash'
+
 export type PageResult<T> = Pick<
   Page<T>,
   'content' | 'number' | 'size' | 'totalElements' | 'totalPages'
@@ -9,6 +10,27 @@ export type PageResult<T> = Pick<
 export type SortChange = {
   prop: string
   order: 'ascending' | 'descending'
+}
+// 忽略空字符串，undefined，null
+const recursiveOmit = (obj: any) => {
+  const obj2 = {
+    ..._.omitBy(obj, (row) => {
+      if (_.isString(row)) {
+        return _.isEmpty(row)
+      } else {
+        return _.isNil(row)
+      }
+    })
+  }
+  const keys = Object.keys(
+    _.pickBy(obj, (row) => {
+      return _.isObject(row)
+    })
+  )
+  keys.forEach((key) => {
+    obj2[key] = recursiveOmit(obj[key])
+  })
+  return obj2
 }
 export const useTableHelper = <T extends Object, E>(
   // 调用后端的查询接口
@@ -44,15 +66,7 @@ export const useTableHelper = <T extends Object, E>(
       ...queryRequest.value,
       ..._.omitBy(request, _.isNull)
     }
-    queryRequest.value.query = {
-      ..._.omitBy(queryRequest.value.query, (row) => {
-        if (_.isString(row)) {
-          return _.isEmpty(row)
-        } else {
-          return _.isNil(row)
-        }
-      })
-    } as T
+    queryRequest.value.query = recursiveOmit(queryRequest.value.query) as T
     loading.value = true
     queryApi.apply(object, [{ body: queryRequest.value }]).then(
       (res) => {

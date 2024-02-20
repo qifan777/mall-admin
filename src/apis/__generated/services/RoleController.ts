@@ -40,6 +40,7 @@ export class RoleController {
     })) as Promise<string>
   }
 }
+
 export type RoleControllerOptions = {
   findById: {
     id: string

@@ -1,10 +1,71 @@
 export const DictConstants = {
+  REFUND_STATUS: 1005,
+  COUPON_TYPE: 1006,
   PAY_TYPE: 1004,
   MENU_TYPE: 1002,
   PRODUCT_ORDER_STATUS: 1003,
-  GENDER: 1001
+  GENDER: 1001,
+  COUPON_SCOPE: 1007
 }
 export const Dictionaries = {
+  RefundStatus: {
+    APPROVED: {
+      keyId: 2,
+      keyName: '已同意',
+      keyEnName: 'APPROVED',
+      dictId: 1005,
+      dictName: '退款状态',
+      dictEnName: 'REFUND_STATUS',
+      orderNum: 0
+    },
+    TO_BE_APPROVE: {
+      keyId: 1,
+      keyName: '待审批',
+      keyEnName: 'TO_BE_APPROVE',
+      dictId: 1005,
+      dictName: '退款状态',
+      dictEnName: 'REFUND_STATUS',
+      orderNum: 0
+    },
+    REJECTED: {
+      keyId: 3,
+      keyName: '已拒绝',
+      keyEnName: 'REJECTED',
+      dictId: 1005,
+      dictName: '退款状态',
+      dictEnName: 'REFUND_STATUS',
+      orderNum: 0
+    },
+    TO_BE_CREATE: {
+      keyId: 0,
+      keyName: '待创建',
+      keyEnName: 'TO_BE_CREATE',
+      dictId: 1005,
+      dictName: '退款状态',
+      dictEnName: 'REFUND_STATUS',
+      orderNum: 0
+    }
+  },
+  CouponType: {
+    DISCOUNT: {
+      keyId: 0,
+      keyName: '折扣券',
+      keyEnName: 'DISCOUNT',
+      dictId: 1006,
+      dictName: '优惠券类型',
+      dictEnName: 'COUPON_TYPE',
+      orderNum: 0
+    },
+    REDUCE: {
+      keyId: 1,
+      keyName: '满减券',
+      keyEnName: 'REDUCE',
+      dictId: 1006,
+      dictName: '优惠券类型',
+      dictEnName: 'COUPON_TYPE',
+      orderNum: 0
+    }
+  },
   PayType: {
     WE_CHAT_PAY: {
       keyId: 0,
@@ -146,6 +207,35 @@ export const Dictionaries = {
       dictName: '性别',
       dictEnName: 'GENDER',
       orderNum: 1
+    }
+  },
+  CouponScope: {
+    CATEGORY: {
+      keyId: 2,
+      keyName: '品类券',
+      keyEnName: 'CATEGORY',
+      dictId: 1007,
+      dictName: '优惠券使用范围',
+      dictEnName: 'COUPON_SCOPE',
+      orderNum: 0
+    },
+    PRODUCT: {
+      keyId: 1,
+      keyName: '商品券',
+      keyEnName: 'PRODUCT',
+      dictId: 1007,
+      dictName: '优惠券使用范围',
+      dictEnName: 'COUPON_SCOPE',
+      orderNum: 0
+    },
+    GENERAL: {
+      keyId: 0,
+      keyName: '通用券',
+      keyEnName: 'GENERAL',
+      dictId: 1007,
+      dictName: '优惠券使用范围',
+      dictEnName: 'COUPON_SCOPE',
+      orderNum: 0
     }
   }
 }

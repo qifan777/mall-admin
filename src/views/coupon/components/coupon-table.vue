@@ -10,6 +10,7 @@ import type { CouponDto } from '@/apis/__generated/model/dto'
 import { Delete, Edit, Plus } from '@element-plus/icons-vue'
 import DictColumn from '@/components/dict/dict-column.vue'
 import { DictConstants } from '@/apis/__generated/model/enums/DictConstants'
+import CouponGift from '@/views/coupon/components/coupon-gift.vue'
 
 type CouponScope = Scope<CouponDto['CouponRepository/COMPLEX_FETCHER']>
 const couponStore = useCouponStore()
@@ -146,7 +147,7 @@ const handleDelete = (ids: string[]) => {
         </template>
       </el-table-column>
       <el-table-column label="操作" fixed="right">
-        <template v-slot:default="{ row }">
+        <template v-slot:default="{ row }: CouponScope">
           <div>
             <el-button class="edit-btn" link size="small" type="primary" @click="handleEdit(row)">
               <el-icon>
@@ -164,6 +165,7 @@ const handleDelete = (ids: string[]) => {
                 <delete />
               </el-icon>
             </el-button>
+            <coupon-gift :coupon-id="row.id"></coupon-gift>
           </div>
         </template>
       </el-table-column>

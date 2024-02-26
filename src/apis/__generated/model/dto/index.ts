@@ -1,5 +1,6 @@
 export type { AddressDto } from './AddressDto'
 export type { CouponDto } from './CouponDto'
+export type { CouponUserDto } from './CouponUserDto'
 export type { DictDto } from './DictDto'
 export type { MenuDto } from './MenuDto'
 export type { ProductCategoryDto } from './ProductCategoryDto'

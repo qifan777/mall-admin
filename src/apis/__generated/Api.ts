@@ -3,6 +3,7 @@ import {
   AddressController,
   AuthController,
   CouponController,
+  CouponUserController,
   DictController,
   MenuController,
   ProductCategoryController,
@@ -21,6 +22,8 @@ export class Api {
   readonly authController: AuthController
 
   readonly couponController: CouponController
+
+  readonly couponUserController: CouponUserController
 
   readonly dictController: DictController
 
@@ -46,6 +49,7 @@ export class Api {
     this.addressController = new AddressController(executor)
     this.authController = new AuthController(executor)
     this.couponController = new CouponController(executor)
+    this.couponUserController = new CouponUserController(executor)
     this.dictController = new DictController(executor)
     this.menuController = new MenuController(executor)
     this.productOrderController = new ProductOrderController(executor)

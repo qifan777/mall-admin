@@ -5,7 +5,9 @@ export const DictConstants = {
   MENU_TYPE: 1002,
   PRODUCT_ORDER_STATUS: 1003,
   GENDER: 1001,
-  COUPON_SCOPE: 1007
+  COUPON_SCOPE: 1007,
+  COUPON_USE_STATUS: 1008,
+  COUPON_RECEIVE_TYPE: 1009
 }
 export const Dictionaries = {
   RefundStatus: {
@@ -235,6 +237,46 @@ export const Dictionaries = {
       dictId: 1007,
       dictName: '优惠券使用范围',
       dictEnName: 'COUPON_SCOPE',
+      orderNum: 0
+    }
+  },
+  CouponUseStatus: {
+    USED: {
+      keyId: 1,
+      keyName: '已使用',
+      keyEnName: 'USED',
+      dictId: 1008,
+      dictName: '优惠券使用状态',
+      dictEnName: 'COUPON_USE_STATUS',
+      orderNum: 0
+    },
+    EXPIRED: {
+      keyId: 2,
+      keyName: '已过期',
+      keyEnName: 'EXPIRED',
+      dictId: 1008,
+      dictName: '优惠券使用状态',
+      dictEnName: 'COUPON_USE_STATUS',
+      orderNum: 0
+    },
+    UNUSED: {
+      keyId: 0,
+      keyName: '未使用',
+      keyEnName: 'UNUSED',
+      dictId: 1008,
+      dictName: '优惠券使用状态',
+      dictEnName: 'COUPON_USE_STATUS',
+      orderNum: 0
+    }
+  },
+  CouponReceiveType: {
+    GIFT: {
+      keyId: 0,
+      keyName: '系统赠送',
+      keyEnName: 'GIFT',
+      dictId: 1009,
+      dictName: '优惠券获取方式',
+      dictEnName: 'COUPON_RECEIVE_TYPE',
       orderNum: 0
     }
   }

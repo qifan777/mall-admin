@@ -1,6 +1,7 @@
 export { AddressController } from './AddressController'
 export { AuthController } from './AuthController'
 export { CouponController } from './CouponController'
+export { CouponUserController } from './CouponUserController'
 export { DictController } from './DictController'
 export { MenuController } from './MenuController'
 export { ProductCategoryController } from './ProductCategoryController'

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { onMounted, ref, watch } from 'vue'
 import { ElOption, ElSelect } from 'element-plus'
+import _ from 'lodash'
 export interface OptionItem {
   label: string
   value: string
@@ -10,7 +11,7 @@ const props = withDefaults(
     modelValue: string[] | string | undefined
     queryOptions: (query: string, defaultValue?: any) => Promise<any[]>
     multiple?: boolean
-    labelProp: string
+    labelProp: string | ((row: any) => string)
     valueProp?: string
   }>(),
   {
@@ -29,8 +30,11 @@ const remoteMethod = (keyword: string, enforce: boolean) => {
     props.queryOptions(keyword.trim()).then((res) => {
       options.value = res.map((row) => {
         return {
-          label: row[props.labelProp] as string,
-          value: row[props.valueProp]
+          label:
+            typeof props.labelProp === 'string'
+              ? _.get(row, props.labelProp)
+              : props.labelProp(row),
+          value: _.get(row, props.valueProp)
         } satisfies OptionItem
       })
       loading.value = false
@@ -51,8 +55,11 @@ watch(
       props.queryOptions('', value).then((res) => {
         const mapRes = res.map((row) => {
           return {
-            label: row[props.labelProp] as string,
-            value: row[props.valueProp]
+            label:
+              typeof props.labelProp === 'string'
+                ? _.get(row, props.labelProp)
+                : props.labelProp(row),
+            value: _.get(row, props.valueProp)
           } satisfies OptionItem
         })
         options.value = [

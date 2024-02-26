@@ -24,3 +24,6 @@ export const useCouponStore = defineStore('coupon', () => {
   const createForm = ref<CouponInput>({ ...initForm })
   return { ...tableHelper, ...dialogHelper, ...queryHelper, updateForm, createForm, initForm }
 })
+export const couponQueryOptions = async (keyword: string, id: string) => {
+  return (await api.couponController.query({ body: { query: { name: keyword, id } } })).content
+}

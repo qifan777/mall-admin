@@ -16,3 +16,13 @@ export const useUserStore = defineStore('user', () => {
   const createForm = ref<UserInput>({ ...initForm })
   return { ...tableHelper, ...dialogHelper, ...queryHelper, updateForm, createForm, initForm }
 })
+export const userQueryOptions = async (keyword: string, id: string) => {
+  return (await api.userController.query({ body: { query: { phone: keyword, id } } })).content
+}
+export const userLabelProp = (row: { nickname?: string; phone: string }) => {
+  if (row.nickname) {
+    return `${row.nickname}(${row.phone})`
+  } else {
+    return row.phone
+  }
+}

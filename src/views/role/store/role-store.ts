@@ -8,7 +8,7 @@ import { ref } from 'vue'
 
 export const useRoleStore = defineStore('role', () => {
   const initQuery: RoleSpec = {}
-  const initForm: RoleInput = { name: '' }
+  const initForm: RoleInput = { menuIds: [], name: '' }
   const tableHelper = useTableHelper(api.roleController.query, api.roleController, initQuery)
   const dialogHelper = useDialogHelper()
   const queryHelper = useQueryHelper<RoleSpec>(initQuery)

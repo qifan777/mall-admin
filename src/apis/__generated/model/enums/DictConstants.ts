@@ -7,7 +7,9 @@ export const DictConstants = {
   GENDER: 1001,
   COUPON_SCOPE: 1007,
   COUPON_USE_STATUS: 1008,
-  COUPON_RECEIVE_TYPE: 1009
+  COUPON_RECEIVE_TYPE: 1009,
+  WALLET_RECORD_TYPE: 1010,
+  AGENT_LEVEL: 1011
 }
 export const Dictionaries = {
   RefundStatus: {
@@ -277,6 +279,64 @@ export const Dictionaries = {
       dictId: 1009,
       dictName: '优惠券获取方式',
       dictEnName: 'COUPON_RECEIVE_TYPE',
+      orderNum: 0
+    }
+  },
+  WalletRecordType: {
+    REBATE: {
+      keyId: 0,
+      keyName: '返佣',
+      keyEnName: 'REBATE',
+      dictId: 1010,
+      dictName: '钱包操作类型',
+      dictEnName: 'WALLET_RECORD_TYPE',
+      orderNum: 0
+    },
+    RECHARGE: {
+      keyId: 1,
+      keyName: '充值',
+      keyEnName: 'RECHARGE',
+      dictId: 1010,
+      dictName: '���包操作类型',
+      dictEnName: 'WALLET_RECORD_TYPE',
+      orderNum: 0
+    },
+    WITHDRAW: {
+      keyId: 2,
+      keyName: '提现',
+      keyEnName: 'WITHDRAW',
+      dictId: 1010,
+      dictName: '钱包操作类型',
+      dictEnName: 'WALLET_RECORD_TYPE',
+      orderNum: 0
+    }
+  },
+  AgentLevel: {
+    FIRST: {
+      keyId: 0,
+      keyName: '1级',
+      keyEnName: 'FIRST',
+      dictId: 1011,
+      dictName: '代理等级',
+      dictEnName: 'AGENT_LEVEL',
+      orderNum: 0
+    },
+    SECOND: {
+      keyId: 1,
+      keyName: '2级',
+      keyEnName: 'SECOND',
+      dictId: 1011,
+      dictName: '代理等级',
+      dictEnName: 'AGENT_LEVEL',
+      orderNum: 0
+    },
+    THIRD: {
+      keyId: 2,
+      keyName: '3级',
+      keyEnName: 'THIRD',
+      dictId: 1011,
+      dictName: '代理等级',
+      dictEnName: 'AGENT_LEVEL',
       orderNum: 0
     }
   }

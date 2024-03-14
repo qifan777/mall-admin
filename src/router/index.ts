@@ -12,6 +12,8 @@ import ProductSkuView from '@/views/product-sku/product-sku-view.vue'
 import ProductOrderView from '@/views/product-order/product-order-view.vue'
 import CouponView from '@/views/coupon/coupon-view.vue'
 import CouponUserView from '@/views/coupon-user/coupon-user-view.vue'
+import agentView from '@/views/agent/agent-view.vue'
+import agentLevelView from '@/views/agent-level/agent-level-view.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -66,6 +68,16 @@ const router = createRouter({
           path: '/coupon-user',
           name: 'coupon-user-view',
           component: CouponUserView
+        },
+        {
+          path: '/agent',
+          name: 'agent-view',
+          component: agentView
+        },
+        {
+          path: '/agent-level',
+          name: 'agent-level-view',
+          component: agentLevelView
         }
       ]
     },

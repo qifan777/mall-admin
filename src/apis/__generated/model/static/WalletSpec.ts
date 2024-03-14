@@ -1,6 +1,7 @@
-export interface UserWeChatSpec {
+export interface WalletSpec {
+  balance?: number | undefined
+  password?: string | undefined
   id?: string | undefined
-  openId?: string | undefined
   minEditedTime?: string | undefined
   maxEditedTime?: string | undefined
   minCreatedTime?: string | undefined

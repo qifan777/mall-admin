@@ -1,4 +1,4 @@
-import type { CouponReceiveType, CouponUseStatus } from '../enums/'
+import type { CouponReceiveType, CouponScope, CouponType, CouponUseStatus } from '../enums/'
 
 export type CouponUserDto = {
   /**
@@ -21,7 +21,17 @@ export type CouponUserDto = {
     }
     coupon: {
       id: string
+      createdTime: string
+      editedTime: string
       name: string
+      thresholdAmount: number
+      releasedQuantity: number
+      effectiveDate: string
+      expirationDate: string
+      type: CouponType
+      scope: CouponScope
+      amount?: number | undefined
+      discount?: number | undefined
     }
     user: {
       id: string

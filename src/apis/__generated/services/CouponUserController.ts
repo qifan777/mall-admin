@@ -46,6 +46,15 @@ export class CouponUserController {
     >
   }
 
+  async queryByUser(
+    options: CouponUserControllerOptions['queryByUser']
+  ): Promise<Page<CouponUserDto['CouponUserRepository/COMPLEX_FETCHER']>> {
+    const _uri = '/couponUser/user'
+    return (await this.executor({ uri: _uri, method: 'POST', body: options.body })) as Promise<
+      Page<CouponUserDto['CouponUserRepository/COMPLEX_FETCHER']>
+    >
+  }
+
   async save(options: CouponUserControllerOptions['save']): Promise<string> {
     const _uri = '/couponUser/save'
     return (await this.executor({
@@ -66,10 +75,13 @@ export type CouponUserControllerOptions = {
   save: {
     body: CouponUserInput
   }
+  delete: {
+    body: Array<string>
+  }
   gift: {
     body: GiftCouponInput
   }
-  delete: {
-    body: Array<string>
+  queryByUser: {
+    body: QueryRequest<CouponUserSpec>
   }
 }

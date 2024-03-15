@@ -23,7 +23,7 @@ const { query } = toRefs(queryData.value)
       </el-form-item>
       <el-form-item label="代理等级">
         <dict-select
-          :dict-id="DictConstants.AGENT_LEVEL"
+          :dict-id="DictConstants.AGENT_LEVEL_NAME"
           v-model="query.agentLevel!.levelName"
         ></dict-select>
       </el-form-item>

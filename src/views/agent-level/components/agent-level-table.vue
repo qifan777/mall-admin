@@ -88,7 +88,10 @@ const handleDelete = (ids: string[]) => {
       </el-table-column>
       <el-table-column label="代理等级" prop="levelName" sortable="custom">
         <template v-slot:default="{ row }: AgentLevelScope">
-          <dict-column :dict-id="DictConstants.AGENT_LEVEL" :value="row.levelName"></dict-column>
+          <dict-column
+            :dict-id="DictConstants.AGENT_LEVEL_NAME"
+            :value="row.levelName"
+          ></dict-column>
         </template>
       </el-table-column>
       <el-table-column label="创建时间" prop="createdTime" sortable="custom">

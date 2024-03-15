@@ -9,7 +9,7 @@ export const DictConstants = {
   COUPON_USE_STATUS: 1008,
   COUPON_RECEIVE_TYPE: 1009,
   WALLET_RECORD_TYPE: 1010,
-  AGENT_LEVEL: 1011
+  AGENT_LEVEL_NAME: 1011
 }
 export const Dictionaries = {
   RefundStatus: {
@@ -297,7 +297,7 @@ export const Dictionaries = {
       keyName: '充值',
       keyEnName: 'RECHARGE',
       dictId: 1010,
-      dictName: '���包操作类型',
+      dictName: '钱包操作类型',
       dictEnName: 'WALLET_RECORD_TYPE',
       orderNum: 0
     },
@@ -311,14 +311,14 @@ export const Dictionaries = {
       orderNum: 0
     }
   },
-  AgentLevel: {
+  AgentLevelName: {
     FIRST: {
       keyId: 0,
       keyName: '1级',
       keyEnName: 'FIRST',
       dictId: 1011,
       dictName: '代理等级',
-      dictEnName: 'AGENT_LEVEL',
+      dictEnName: 'AGENT_LEVEL_NAME',
       orderNum: 0
     },
     SECOND: {
@@ -327,7 +327,7 @@ export const Dictionaries = {
       keyEnName: 'SECOND',
       dictId: 1011,
       dictName: '代理等级',
-      dictEnName: 'AGENT_LEVEL',
+      dictEnName: 'AGENT_LEVEL_NAME',
       orderNum: 0
     },
     THIRD: {
@@ -336,7 +336,7 @@ export const Dictionaries = {
       keyEnName: 'THIRD',
       dictId: 1011,
       dictName: '代理等级',
-      dictEnName: 'AGENT_LEVEL',
+      dictEnName: 'AGENT_LEVEL_NAME',
       orderNum: 0
     }
   }

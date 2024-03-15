@@ -1,5 +1,5 @@
-import type { AgentLevel } from '../enums/'
+import type { AgentLevelName } from '../enums/'
 
 export interface AgentSpec_TargetOf_agentLevel {
-  levelName?: AgentLevel | undefined
+  levelName?: AgentLevelName | undefined
 }

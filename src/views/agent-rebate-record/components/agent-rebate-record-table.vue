@@ -5,14 +5,16 @@ import { assertSuccess } from '@/utils/common'
 import { api } from '@/utils/api-instance'
 import { ElMessageBox } from 'element-plus'
 import type { Scope } from '@/typings'
-import { useAgentStore } from '../store/agent-store'
-import type { AgentDto } from '@/apis/__generated/model/dto'
+import { useAgentRebateRecordStore } from '../store/agent-rebate-record-store'
+import type { AgentRebateRecordDto } from '@/apis/__generated/model/dto'
 import { Delete, Edit, Plus } from '@element-plus/icons-vue'
 import DictColumn from '@/components/dict/dict-column.vue'
 import { DictConstants } from '@/apis/__generated/model/enums/DictConstants'
 
-type AgentScope = Scope<AgentDto['AgentRepository/COMPLEX_FETCHER']>
-const agentStore = useAgentStore()
+type AgentRebateRecordScope = Scope<
+  AgentRebateRecordDto['AgentRebateRecordRepository/COMPLEX_FETCHER']
+>
+const agentRebateRecordStore = useAgentRebateRecordStore()
 const {
   loadTableData,
   reloadTableData,
@@ -20,8 +22,9 @@ const {
   handleSortChange,
   handleSelectChange,
   getTableSelectedRows
-} = agentStore
-const { pageData, loading, queryRequest, table, updateForm, createForm } = storeToRefs(agentStore)
+} = agentRebateRecordStore
+const { pageData, loading, queryRequest, table, updateForm, createForm } =
+  storeToRefs(agentRebateRecordStore)
 onMounted(() => {
   reloadTableData()
 })
@@ -31,7 +34,7 @@ const handleEdit = (row: { id: string }) => {
 }
 const handleCreate = () => {
   openDialog('CREATE')
-  createForm.value = { ...agentStore.initForm }
+  createForm.value = { ...agentRebateRecordStore.initForm }
 }
 const handleSingleDelete = (row: { id: string }) => {
   handleDelete([row.id])
@@ -49,7 +52,7 @@ const handleDelete = (ids: string[]) => {
     cancelButtonText: '取消',
     type: 'warning'
   }).then(() => {
-    api.agentController.delete({ body: ids }).then((res) => {
+    api.agentRebateRecordController.delete({ body: ids }).then((res) => {
       assertSuccess(res).then(() => reloadTableData())
     })
   })
@@ -80,41 +83,56 @@ const handleDelete = (ids: string[]) => {
       v-loading="loading"
     >
       <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column label="用户" prop="user" sortable="custom">
-        <template v-slot:default="{ row }: AgentScope">
-          {{ row.user.nickname }}({{ row.user.phone }})
+      <el-table-column label="代理人" prop="agentId" sortable="custom">
+        <template v-slot:default="{ row }: AgentRebateRecordScope">
+          {{ row.agentId }}
         </template>
       </el-table-column>
-      <el-table-column label="代理等级" prop="agentLevel.name" sortable="custom">
-        <template v-slot:default="{ row }: AgentScope">
+      <el-table-column label="返佣订单号" prop="productOrderId" sortable="custom">
+        <template v-slot:default="{ row }: AgentRebateRecordScope">
+          {{ row.productOrderId }}
+        </template>
+      </el-table-column>
+      <el-table-column label="钱包流水号" prop="walletRecordId" sortable="custom">
+        <template v-slot:default="{ row }: AgentRebateRecordScope">
+          {{ row.walletRecordId }}
+        </template>
+      </el-table-column>
+      <el-table-column label="佣金" prop="walletRecordId" sortable="custom">
+        <template v-slot:default="{ row }: AgentRebateRecordScope">
+          {{ row.walletRecord.amount }}
+        </template>
+      </el-table-column>
+      <el-table-column label="返佣者" prop="fromAgentId" sortable="custom">
+        <template v-slot:default="{ row }: AgentRebateRecordScope">
+          {{ row.fromAgentId }}
+        </template>
+      </el-table-column>
+      <el-table-column label="来自第n级的返佣" prop="fromLevelName" sortable="custom">
+        <template v-slot:default="{ row }: AgentRebateRecordScope">
           <dict-column
             :dict-id="DictConstants.AGENT_LEVEL_NAME"
-            :value="row.agentLevel.levelName"
+            :value="row.fromLevelName"
           ></dict-column>
         </template>
       </el-table-column>
-      <el-table-column label="代理商编号" prop="agentNo" sortable="custom">
-        <template v-slot:default="{ row }: AgentScope">
-          {{ row.agentNo }}
-        </template>
-      </el-table-column>
       <el-table-column label="创建时间" prop="createdTime" sortable="custom">
-        <template v-slot:default="{ row }: AgentScope">
+        <template v-slot:default="{ row }: AgentRebateRecordScope">
           {{ row.createdTime }}
         </template>
       </el-table-column>
       <el-table-column label="更新时间" prop="editedTime" sortable="custom">
-        <template v-slot:default="{ row }: AgentScope">
+        <template v-slot:default="{ row }: AgentRebateRecordScope">
           {{ row.editedTime }}
         </template>
       </el-table-column>
       <el-table-column label="创建人" prop="creator.phone" sortable="custom" show-overflow-tooltip>
-        <template v-slot:default="{ row }: AgentScope">
+        <template v-slot:default="{ row }: AgentRebateRecordScope">
           {{ row.creator.nickname }}({{ row.creator.phone }})
         </template>
       </el-table-column>
       <el-table-column label="更新人" prop="editor.phone" sortable="custom" show-overflow-tooltip>
-        <template v-slot:default="{ row }: AgentScope">
+        <template v-slot:default="{ row }: AgentRebateRecordScope">
           {{ row.editor.nickname }}({{ row.editor.phone }})
         </template>
       </el-table-column>

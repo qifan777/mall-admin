@@ -50,7 +50,7 @@ const handleConfirm = () => {
       </el-form-item>
       <el-form-item label="代理等级" prop="levelName">
         <dict-select
-          :dict-id="DictConstants.AGENT_LEVEL"
+          :dict-id="DictConstants.AGENT_LEVEL_NAME"
           v-model="updateForm.levelName"
         ></dict-select>
       </el-form-item>

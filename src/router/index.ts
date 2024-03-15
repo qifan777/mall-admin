@@ -14,6 +14,7 @@ import CouponView from '@/views/coupon/coupon-view.vue'
 import CouponUserView from '@/views/coupon-user/coupon-user-view.vue'
 import agentView from '@/views/agent/agent-view.vue'
 import agentLevelView from '@/views/agent-level/agent-level-view.vue'
+import AgentRebateRecordView from '@/views/agent-rebate-record/agent-rebate-record-view.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -78,6 +79,11 @@ const router = createRouter({
           path: '/agent-level',
           name: 'agent-level-view',
           component: agentLevelView
+        },
+        {
+          path: '/agent-rebate-record',
+          name: 'agent-rebate-record-view',
+          component: AgentRebateRecordView
         }
       ]
     },

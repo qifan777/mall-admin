@@ -1,5 +1,5 @@
-export type { AgentLevel } from './AgentLevel'
-export { AgentLevel_CONSTANTS } from './AgentLevel'
+export type { AgentLevelName } from './AgentLevelName'
+export { AgentLevelName_CONSTANTS } from './AgentLevelName'
 export type { CouponReceiveType } from './CouponReceiveType'
 export { CouponReceiveType_CONSTANTS } from './CouponReceiveType'
 export type { CouponScope } from './CouponScope'

@@ -12,7 +12,7 @@ export type SortChange = {
   order: 'ascending' | 'descending'
 }
 // 忽略空字符串，undefined，null
-const recursiveOmit = (obj: any) => {
+export const recursiveOmit = (obj: any) => {
   const obj2 = {
     ..._.omitBy(obj, (row) => {
       if (_.isString(row)) {

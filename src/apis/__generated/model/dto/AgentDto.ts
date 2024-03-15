@@ -1,4 +1,4 @@
-import type { AgentLevel } from '../enums/'
+import type { AgentLevelName } from '../enums/'
 
 export type AgentDto = {
   /**
@@ -15,7 +15,7 @@ export type AgentDto = {
       createdTime: string
       editedTime: string
       tenantId?: string | undefined
-      levelName: AgentLevel
+      levelName: AgentLevelName
       rate: number
     }
     userId: string

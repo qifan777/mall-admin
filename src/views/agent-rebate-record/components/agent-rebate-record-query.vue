@@ -1,24 +1,33 @@
 <script lang="ts" setup>
 import { toRefs } from 'vue'
-import { useAgentLevelStore } from '../store/agent-level-store'
+import { useAgentRebateRecordStore } from '../store/agent-rebate-record-store'
 import { storeToRefs } from 'pinia'
 import DictSelect from '@/components/dict/dict-select.vue'
 import { DictConstants } from '@/apis/__generated/model/enums/DictConstants'
 
-const agentLevelStore = useAgentLevelStore()
-const { queryData } = storeToRefs(agentLevelStore)
+const agentRebateRecordStore = useAgentRebateRecordStore()
+const { queryData } = storeToRefs(agentRebateRecordStore)
 const { query } = toRefs(queryData.value)
 </script>
 <template>
   <div class="search">
     <el-form inline label-width="80" size="small">
-      <el-form-item label="佣金比例">
-        <el-input-number v-model="query.rate" controls-position="right"></el-input-number>
+      <el-form-item label="代理人">
+        <el-input v-model="query.agent!.agentNo"></el-input>
       </el-form-item>
-      <el-form-item label="代理等级">
+      <el-form-item label="返佣订单号">
+        <el-input v-model="query.productOrderId"></el-input>
+      </el-form-item>
+      <el-form-item label="钱包流水号">
+        <el-input v-model="query.walletRecordId"></el-input>
+      </el-form-item>
+      <el-form-item label="返佣者">
+        <el-input v-model="query.fromAgent!.id"></el-input>
+      </el-form-item>
+      <el-form-item label="来自第n级的返佣">
         <dict-select
           :dict-id="DictConstants.AGENT_LEVEL_NAME"
-          v-model="query.levelName"
+          v-model="query.fromLevelName"
         ></dict-select>
       </el-form-item>
       <el-form-item label=" ">
@@ -26,11 +35,11 @@ const { query } = toRefs(queryData.value)
           <el-button
             type="primary"
             size="small"
-            @click="agentLevelStore.reloadTableData({ query: query, likeMode: 'ANYWHERE' })"
+            @click="agentRebateRecordStore.reloadTableData({ query: query, likeMode: 'ANYWHERE' })"
           >
             查询
           </el-button>
-          <el-button type="warning" size="small" @click="agentLevelStore.restQuery()">
+          <el-button type="warning" size="small" @click="agentRebateRecordStore.restQuery()">
             重置</el-button
           >
         </div>

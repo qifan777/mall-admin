@@ -1,8 +1,8 @@
-import type { AgentLevel } from '../enums/'
+import type { AgentLevelName } from '../enums/'
 
 export interface AgentLevelInput {
   tenantId?: string | undefined
-  levelName: AgentLevel
+  levelName: AgentLevelName
   rate: number
   id?: string | undefined
 }

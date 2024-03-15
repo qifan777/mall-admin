@@ -1,22 +1,23 @@
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia'
 import { reactive, ref, watch } from 'vue'
-import { useAgentStore } from '../store/agent-store'
+import { useAgentRebateRecordStore } from '../store/agent-rebate-record-store'
 import { assertFormValidate, assertSuccess } from '@/utils/common'
 import { api } from '@/utils/api-instance'
 import FooterButton from '@/components/base/dialog/footer-button.vue'
 import DictSelect from '@/components/dict/dict-select.vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import { DictConstants } from '@/apis/__generated/model/enums/DictConstants'
-import { userLabelProp, userQueryOptions } from '@/views/user/store/user-store'
-import RemoteSelect from '@/components/base/form/remote-select.vue'
 
-const agentStore = useAgentStore()
-const { closeDialog, reloadTableData } = agentStore
-const { createForm, dialogData } = storeToRefs(agentStore)
+const agentRebateRecordStore = useAgentRebateRecordStore()
+const { closeDialog, reloadTableData } = agentRebateRecordStore
+const { createForm, dialogData } = storeToRefs(agentRebateRecordStore)
 const createFormRef = ref<FormInstance>()
 const rules = reactive<FormRules<typeof createForm>>({
-  agentNo: [{ required: true, message: '请输入代理商编号', trigger: 'blur' }]
+  agentId: [{ required: true, message: '请输入代理人', trigger: 'blur' }],
+  productOrderId: [{ required: true, message: '请输入返佣订单号', trigger: 'blur' }],
+  walletRecordId: [{ required: true, message: '请输入钱包流水号', trigger: 'blur' }],
+  fromAgentId: [{ required: true, message: '请输入返佣者', trigger: 'blur' }]
 })
 const init = async () => {
   dialogData.value.title = '创建'
@@ -34,7 +35,7 @@ watch(
 const handleConfirm = () => {
   createFormRef.value?.validate(
     assertFormValidate(() =>
-      api.agentController.save({ body: createForm.value }).then(async (res) => {
+      api.agentRebateRecordController.save({ body: createForm.value }).then(async (res) => {
         assertSuccess(res).then(() => {
           closeDialog()
           reloadTableData()
@@ -47,21 +48,23 @@ const handleConfirm = () => {
 <template>
   <div class="create-form">
     <el-form labelWidth="120" class="form" ref="createFormRef" :model="createForm" :rules="rules">
-      <el-form-item label="用户id" prop="userId">
-        <remote-select
-          v-model="createForm.userId"
-          :label-prop="userLabelProp"
-          :query-options="userQueryOptions"
-        ></remote-select>
+      <el-form-item label="代理人" prop="agentId">
+        <el-input v-model="createForm.agentId"></el-input>
       </el-form-item>
-      <el-form-item label="代理等级" prop="agentLevel.name">
+      <el-form-item label="返佣订单号" prop="productOrderId">
+        <el-input v-model="createForm.productOrderId"></el-input>
+      </el-form-item>
+      <el-form-item label="钱包流水号" prop="walletRecordId">
+        <el-input v-model="createForm.walletRecordId"></el-input>
+      </el-form-item>
+      <el-form-item label="返佣者" prop="fromAgentId">
+        <el-input v-model="createForm.fromAgentId"></el-input>
+      </el-form-item>
+      <el-form-item label="来自第n级的返佣" prop="fromLevelName">
         <dict-select
           :dict-id="DictConstants.AGENT_LEVEL_NAME"
-          v-model="createForm.agentLevel.levelName"
+          v-model="createForm.fromLevelName"
         ></dict-select>
-      </el-form-item>
-      <el-form-item label="代理商编号" prop="agentNo">
-        <el-input v-model="createForm.agentNo"></el-input>
       </el-form-item>
     </el-form>
     <footer-button @close="closeDialog" @confirm="handleConfirm"></footer-button>
